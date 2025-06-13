@@ -16,27 +16,33 @@ const HomeSlider = () => {
     arrows: false,
   };
 
-  // https://i.ibb.co/sd3ywHGM/large-group-cooking-valentines-class-2-Kitchen-on-Fire.webp
-  //https://i.ibb.co/xtWtcVFd/happy-woman-yellow-dress.jpg
-// https://i.ibb.co/Fqk2Btyr/happy-woman-yellow-sweater.jpg
-
+  
   const slides = [
   {
-    image: "",
-    // title: "Get Insightful Product Recommendations",
-    // subtitle: "Ask about any product and get real suggestions from the community.",
+    image: "https://images.unsplash.com/photo-1607083206173-2f9ce7d2a6f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+    // A person browsing e-commerce products on a tablet — very relevant to asking for product recommendations
+    title: "Get Insightful Product Recommendations",
+    subtitle: "Ask about any product and get real suggestions from the community.",
   },
   {
-    image: "",
-    // title: "Compare and Choose Better",
-    // subtitle: "Discover high-quality alternatives and make smarter purchases.",
+    image: "https://images.unsplash.com/photo-1585655851322-d9b6f3d2f3e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+    // Side-by-side screen comparison — great fit for comparing product alternatives
+    title: "Compare and Choose Better",
+    subtitle: "Discover high-quality alternatives and make smarter purchases.",
   },
   {
-    image: "",
-    // title: "Join a Helpful Community",
-    // subtitle: "Share your knowledge and help others shop wisely.",
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+    // Friendly people having a discussion — fits community sharing vibe
+    title: "Join a Helpful Community",
+    subtitle: "Share your knowledge and help others shop wisely.",
   },
 ];
+
+
+
+
+
+
   return (
     <section className="max-w-8xl mx-auto px-4 mt-6">
       <Slider {...sliderSettings}>
