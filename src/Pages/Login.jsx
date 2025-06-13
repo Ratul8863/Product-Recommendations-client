@@ -1,87 +1,89 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Contexts/AuthContext';
 import Lottie from 'lottie-react';
-import lottieSignin from '../assets/SignInSpiderman.json'
-import { Link, useNavigate } from 'react-router';
+import login from '../assets/loginman.json';
+import { Link, useNavigate } from 'react-router-dom';
+import SignInWithGoogle from './Shared/SignInWithGoogle';
+
 function Login() {
-    const {SignInuser}=useContext(AuthContext)
-    const [error, setError] = useState("");
+  const { SignInuser } = useContext(AuthContext);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
- const handleSignin = e =>{
-         e.preventDefault();
-          const form = e.target;
-          const email =form.email.value;
-          const password =form.password.value;
-          console.log(email,password)
 
-         SignInuser(email,password)
-.then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    console.log(user)
-    // navigate(from)
-      navigate("/");
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-     setError(errorMessage);
-    // ..
-  });
+  const handleSignin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
- }
+    SignInuser(email, password)
+      .then((userCredential) => {
+        console.log(userCredential.user);
+        navigate('/');
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-purple-200 via-blue-200 to-pink-200 flex items-center justify-center px-4 py-10 md:py-0">
+      <div className="bg-white/30 backdrop-blur-md rounded-2xl shadow-lg max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 p-6 md:p-12">
+        {/* Animation */}
+        <div className="flex items-center justify-center">
+          <Lottie className="w-72 md:w-96" animationData={login} loop />
+        </div>
 
-  <div className="hero  min-h-screen">
-  <div className="hero-content flex-col-reverse lg:flex-row-reverse">
-    <div className="text-center lg:text-left">
-      <Lottie className='w-80' animationData={lottieSignin} loop={true} />
+        {/* Form */}
+        <div className="flex flex-col justify-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Sign In to Your Account</h2>
 
-      
-    </div>
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-      <div className="card-body">
-        <h1 className="text-5xl font-bold">Sign In now!</h1>
-        {/* <SignInWithGoogle from={from}></SignInWithGoogle> */}
-        <form action="" onSubmit={handleSignin}>
+          <SignInWithGoogle />
 
-<fieldset className="fieldset">
-          <label className="label">Email</label>
-          <input type="email" name='email' className="input" placeholder="Email" />
-          <label className="label">Password</label>
-          <input type="password" name='password' className="input" placeholder="Password" />
-          <div><a className="link link-hover">Forgot password?</a></div>
-          <button type='submit' className="btn btn-neutral mt-4">Sign In</button>
-        </fieldset>
+          <form onSubmit={handleSignin} className="space-y-4 mt-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                name="email"
+                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <div className="text-right">
+              <a className="text-sm text-blue-600 hover:underline cursor-pointer">Forgot password?</a>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
+            >
+              Sign In
+            </button>
+          </form>
 
+          {error && <p className="text-red-500 mt-3 text-sm text-center">{error}</p>}
 
-        </form>
-
-
-
-         {error && <p className="text-red-500 mt-3">{error}</p>}
-
-      <p className="mt-4 text-center">
-        Don't have an account? <Link to="/register" className="text-blue-600">Register here</Link>
-      </p>
-        
+          <p className="mt-4 text-sm text-center">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-blue-600 hover:underline">
+              Register here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-    
-   
-
-      {/* <button  className="btn btn-outline w-full mt-4">Continue with Google</button> */}
-
-     
-   
-    </>
-    
-  )
+  );
 }
 
-export default Login
+export default Login;

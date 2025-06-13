@@ -1,2 +1,19 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* index.css */
+/* index.css */
+body {
+  @apply bg-[#0d1128] ;
+}
+
+  *{
+    font-family: "Poppins", sans-serif;
+  }
+   a.active
+{
+    text-decoration-line: underline;
+    /* border: solid;
+    border-radius: 20%;
+     background-color: #a1e362;*/
+}

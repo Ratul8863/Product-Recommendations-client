@@ -14,6 +14,7 @@ import RecommendationsForMe from "../Pages/RecommendationsForMe";
 import { createBrowserRouter } from "react-router";
 import NotFound from "../Pages/NotFound";
 import Addquary from "../Pages/Addquary";
+import Updatequary from "../Pages/Updatequary";
 
 export const router = createBrowserRouter([
   {
@@ -28,17 +29,17 @@ export const router = createBrowserRouter([
       {
         path: "/add-query",
         element: (
-       <PrivetRoutes><Addquary></Addquary></PrivetRoutes>
-            
-         
+          <PrivetRoutes><Addquary></Addquary></PrivetRoutes>
+
+
         ),
       },
       {
         path: "/my-queries",
         element: (
           <PrivetRoutes> <MyQueries /></PrivetRoutes>
-           
-          
+
+
         ),
       },
       {
@@ -46,17 +47,23 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoutes> <QuaryDetails></QuaryDetails></PrivetRoutes>
         ),
+        loader: ({ params }) => fetch(`http://localhost:5000/queries/${params.id}`)
+      },
+
+      {
+        path: "/update-query/:id",
+        element: <PrivetRoutes><Updatequary></Updatequary></PrivetRoutes>
       },
       {
         path: "/my-recommendations",
         element: (
-         <PrivetRoutes> <MyRecommendations></MyRecommendations></PrivetRoutes>
+          <PrivetRoutes> <MyRecommendations></MyRecommendations></PrivetRoutes>
         ),
       },
       {
         path: "/recommendations-for-me",
         element: (
-         <PrivetRoutes> <RecommendationsForMe></RecommendationsForMe></PrivetRoutes>
+          <PrivetRoutes> <RecommendationsForMe></RecommendationsForMe></PrivetRoutes>
         ),
       },
     ],

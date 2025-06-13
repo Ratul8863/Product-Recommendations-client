@@ -3,6 +3,8 @@ import lottieregister from '../assets/Register.json'
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthContext";
 import Lottie from "lottie-react";
+import SignInWithGoogle from "./Shared/SignInWithGoogle";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const { createuser, updateUserProfile } = useContext(AuthContext);
@@ -16,6 +18,27 @@ export default function Register() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const photoURL = e.target.photoURL.value;
+
+     if (password.length < 6) {
+      toast.error("password must have 6 characters");
+      seter('password must have 6 characters');
+      return;
+    }
+    if (!/[a-z]/.test(password)) {
+      toast.error("password must have a lower case letter");
+      seter('password must have a lower case letter');
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      toast.error("password must have an upper case letter");
+      seter('password must have an upper case letter');
+      return;
+    }
+    if (!/[^a-zA-Z0-9]/.test(password)) {
+      toast.error("password must have at least one special character");
+      seter('password must have at least one special character');
+      return;
+    }
 
     createuser(email, password)
       .then((res) => {
@@ -46,12 +69,12 @@ export default function Register() {
       <div className="card-body text-center">
         <h1 className="text-5xl font-bold">Sign Up now!</h1>
 
-        {/* <SignInWithGoogle></SignInWithGoogle> */}
+        <SignInWithGoogle></SignInWithGoogle>
         <form onSubmit={handleRegister} className="space-y-4">
         <input type="text" name="name" placeholder="Full Name" className="input input-bordered w-full" required />
         <input type="text" name="photoURL" placeholder="Photo URL" className="input input-bordered w-full" required />
         <input type="email" name="email" placeholder="Email" className="input input-bordered w-full" required />
-        <input type="password" name="password" placeholder="Password" className="input input-bordered w-full" required />
+        <input type="password" name="password" placeholder="password" className="input input-bordered w-full" required />
         <button type="submit" className="btn btn-success w-full">Register</button>
       </form>
 
