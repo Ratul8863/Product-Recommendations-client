@@ -14,9 +14,9 @@ function Navbar() {
   };
 
   return (
-  <div className="w-full shadow z-50">
+  <div className="w-full shadow z-50  ">
   {/* Top Info Bar */}
-  <div className="hidden md:flex justify-between items-center px-6 py-2 text-sm bg-[#0D1128] text-lime-400 font-medium">
+  <div className="hidden  md:flex justify-between items-center px-6 py-2 text-sm bg-[#0D1128] text-lime-400 font-medium ">
     <div className="flex items-center gap-4">
       <span className="flex items-center gap-1"><FaPhoneAlt /> + (1800) 456 7890</span>
       <span className="flex items-center gap-1"><FaEnvelope /> info@query.com</span>
@@ -31,7 +31,7 @@ function Navbar() {
 
   {/* Main Navbar */}
   
-  <div className="navbar bg-[#0D1128] text-white px-4 lg:px-10 sticky top-0 z-50">
+  <div className="navbar bg-[#0D1128] text-white px-4 lg:px-10 ">
     {/* Logo */}
     
     <div className="navbar-start">

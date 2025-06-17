@@ -7,13 +7,34 @@ const RecommendationsForMe = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`http://localhost:5000/recommendations/user/${user.email}`), {
+  //     method: 'GET',
+  //     credentials: 'include' // ✅ this is required for JWT cookie to be sent
+  //   }
+  //       .then((res) => res.json())
+  //       .then((data) => setRecommendations(data));
+  //   }
+  // }, [user]);
+
   useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:5000/recommendations/user/${user.email}`)
-        .then((res) => res.json())
-        .then((data) => setRecommendations(data));
-    }
-  }, [user]);
+  if (user?.email) {
+    fetch(`http://localhost:5000/recommendations/user/${user.email}`, {
+      method: 'GET',
+      credentials: 'include' // ✅ this is required for JWT cookie to be sent
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Unauthorized or error fetching data');
+        }
+        return res.json();
+      })
+      .then((data) => setRecommendations(data))
+      .catch((error) => console.error("JWT Protected Fetch Error:", error));
+  }
+}, [user]);
+
 
   const handleDelete = async (id) => {
     const confirm = window.confirm("Are you sure you want to delete this recommendation?");
