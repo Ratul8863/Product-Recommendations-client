@@ -1,5 +1,5 @@
 export const myRecPromise = email => {
-  return fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/recommendations?email=${email}`, {
+  return fetch(`http://localhost:5000/recommendations?email=${email}`, {
     credentials: 'include',
   })
   .then(res => {

@@ -1,4 +1,5 @@
 import React, { use, useState } from 'react';
+import { toast } from 'react-toastify';
 
 function Reclist({ myRecPromise }) {
   const Recs = use(myRecPromise);
@@ -6,17 +7,19 @@ function Reclist({ myRecPromise }) {
   const [recommendations, setRecommendations] = useState(Recs);
 
   const handleDelete = async (recId, queryId) => {
+    console.log(recId)
     const confirm = window.confirm("Are you sure you want to delete this recommendation?");
     if (!confirm) return;
 
     try {
-      const res = await fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/recommendations/${recId}`, {
+      const res = await fetch(`http://localhost:5000/recommendations/${recId}`, {
         method: 'DELETE',
       });
 
       const data = await res.json();
-      if (data.deletedCount > 0) {
-        await fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/queries/${queryId}/decrease-recommendation`, {
+      console.log(data)
+      if (data.success) {
+        await fetch(`http://localhost:5000/queries/${queryId}/decrease-recommendation`, {
           method: 'PATCH',
         });
 

@@ -9,7 +9,7 @@ const RecommendationsForMe = () => {
 
   // useEffect(() => {
   //   if (user?.email) {
-  //     fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/recommendations/user/${user.email}`), {
+  //     fetch(`http://localhost:5000/recommendations/user/${user.email}`), {
   //     method: 'GET',
   //     credentials: 'include' // ✅ this is required for JWT cookie to be sent
   //   }
@@ -20,7 +20,7 @@ const RecommendationsForMe = () => {
 
   useEffect(() => {
   if (user?.email) {
-    fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/recommendations/user/${user.email}`, {
+    fetch(`http://localhost:5000/recommendations/user/${user.email}`, {
       method: 'GET',
       credentials: 'include' // ✅ this is required for JWT cookie to be sent
     })
@@ -40,7 +40,7 @@ const RecommendationsForMe = () => {
   //   const confirm = window.confirm("Are you sure you want to delete this recommendation?");
   //   if (!confirm) return;
 
-  //   const res = await fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/recommendations/${id}`, {
+  //   const res = await fetch(`http://localhost:5000/recommendations/${id}`, {
   //     method: "DELETE",
   //   });
 
@@ -80,7 +80,7 @@ console.log(currentItems)
                 <h3 className="text-xl font-bold text-lime-300 mb-1">{rec.productName}</h3>
                 <p className="mb-1"><span className="font-medium text-lime-400">Reason:</span> {rec.recommendationReason}</p>
                 <p className="text-sm text-gray-400 mb-3">Submitted: {new Date(rec.createdAt).toLocaleString()}</p>
-                
+         
               </div>
             )
           ))}

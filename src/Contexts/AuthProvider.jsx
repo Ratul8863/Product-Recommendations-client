@@ -42,7 +42,7 @@ const updateuser = (updated) => updateProfile(auth.currentUser, updated);
 
         if(currentUser?.email){
             const userData = {email : currentUser.email}
-axios.post('https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/jwt', userData,{
+axios.post('http://localhost:5000/jwt', userData,{
     withCredentials : true
 })
 .then (res =>{

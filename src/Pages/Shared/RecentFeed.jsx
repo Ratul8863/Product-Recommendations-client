@@ -18,7 +18,7 @@ const RecentFeed = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-  fetch('https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/queries/recent', {
+  fetch('http://localhost:5000/queries/recent', {
     credentials: 'include'
   })
     .then(res => res.json())
@@ -34,7 +34,7 @@ const RecentFeed = () => {
         ;
         }
         try {
-            const res = await fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/queries/like/${id}`, {
+            const res = await fetch(`http://localhost:5000/queries/like/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userEmail: user.email })
@@ -52,7 +52,7 @@ const RecentFeed = () => {
                         return query;
                     })
                 );
-                const updated = await fetch('https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/queries/recent').then(res => res.json());
+                const updated = await fetch('http://localhost:5000/queries/recent').then(res => res.json());
                 setRecentQueries(updated);
             } else {
                 alert("Failed to update like.");

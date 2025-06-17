@@ -1,12 +1,49 @@
-# React + Vite
+# 🌐 Product Recommendation System - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** of the full-stack Product Recommendation System built with **React**, **Tailwind CSS**, and **Firebase** for user authentication. It communicates with the backend via REST APIs and uses **JWT** stored in cookies to protect user-specific routes.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 Project Purpose
 
-## Expanding the ESLint configuration
+To create a platform where users can post queries and receive helpful product recommendations from others. It supports email/password and Google login, query updates, likes, shares, and recommendation management — all protected by secure JWT-based authentication.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🔗 Live URL
+
+👉 https://product-recommendation-byratul.web.app/
+
+---
+
+## 🚀 Key Features
+
+- 🔐 **Firebase Authentication** (Google + Email/Password)
+- 🪪 **JWT-based Route Protection** with cookies
+- 📥 Submit, update, and delete product queries
+- 💡 Recommend products to existing queries
+- ❤️ Like/unlike any query
+- 🌈 Fully responsive & dark-themed UI
+- 🍪 Uses HttpOnly cookies for secure JWT storage
+- 🧠 Personalized query and recommendation dashboards
+- 📊 Recommendation count and activity tracking
+
+---
+
+## 🔧 Tech Stack & NPM Packages
+
+### 🔨 Core Tech:
+- **React.js** (Vite)
+- **Tailwind CSS**
+- **Firebase Authentication**
+- **Axios** (`axios`)
+- **React Router DOM** (`react-router-dom`)
+- **React Toastify** (`react-toastify`)
+- **Lottie-react** (`lottie-react`) for animations
+- **React Icons** (`react-icons`)
+- **React Awesome Reveal** (`react-awesome-reveal`)
+
+### 📦 Installed NPM Packages:
+
+```bash
+npm install axios react-router-dom firebase react-toastify react-icons lottie-react react-awesome-reveal
