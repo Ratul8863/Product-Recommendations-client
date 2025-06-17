@@ -22,7 +22,7 @@ const Home = () => {
         {/* Recent Queries Section */}
         <div className="px-4 py-8 ">
           <h2 className="text-2xl md:text-3xl lg:text-4xl text-yellow-400 font-bold text-center mb-6">
-            📢 Recent Queries
+            📢 Recent Queries 
           </h2>
           <RecentFeed />
         </div>
@@ -83,7 +83,7 @@ const Home = () => {
           </Link>
         </div>
 
-        <ExtraSection1 />
+       
         <ExtraSection2 />
 
       </div>
