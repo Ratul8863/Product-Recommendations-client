@@ -83,8 +83,17 @@ function Navbar() {
     </ul>
   </div>
 </div>
-
-      <Link to="/" className="text-3xl font-bold text-lime-400 hover:text-lime-300 transition">Query.</Link>
+    <NavLink
+          to="/"
+          className=" border-0  hover:text-white    font-bold text-xl flex items-center gap-2"
+        >
+          <img
+            className="w-8 h-8 ml-[-10Px] md:ml-5"
+            src="https://i.ibb.co/39WLdycb/image.png"
+            alt="RecoSys"
+          />
+          <span className="text-sm md:text-2xl">RecoSys</span>
+        </NavLink>
     </div>
 
     {/* Center Navigation */}

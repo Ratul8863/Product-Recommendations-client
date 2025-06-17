@@ -85,7 +85,7 @@ function Footer() {
         <Link onClick={() => window.scrollTo(0, 0)} to="/" className="flex items-center gap-3 mb-4 md:mb-0">
           {/* Using a themed placeholder logo. Replace with your actual dark-theme compatible logo. */}
           <img
-            src="https://placehold.co/40x40/1c1f3b/a3e635?text=Logo" // Dark background, lime text
+            src="https://i.ibb.co/39WLdycb/image.png" // Dark background, lime text
             alt="RecoSys Logo"
             className="w-10 h-10 rounded-full border border-lime-400"
           />

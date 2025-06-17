@@ -5,6 +5,7 @@ import banner2 from "../assets/Banner2.json"
 import Lottie from 'lottie-react';
 import { motion } from "motion/react"
 import { Typewriter } from 'react-simple-typewriter'
+import { Link } from 'react-router';
 
 const Banner = () => {
   return (
@@ -53,9 +54,9 @@ const Banner = () => {
         Discover local hobby groups and build meaningful connections.
       </p> */}
     </div>
-        <button className="bg-lime-400 mt-2 text-black font-semibold px-6 py-3 rounded hover:bg-lime-500 transition">
+       <Link to={'/queries'}> <button className="bg-lime-400 mt-2 text-black font-semibold px-6 py-3 rounded hover:bg-lime-500 transition">
           FIND OUT MORE
-        </button>
+        </button></Link>
       </div>
 
       {/* Characters */}
