@@ -13,7 +13,7 @@ const Queries = () => {
 
     useEffect(() => {
         // Fetch all queries, sorted in descending order of creation date
-        fetch('http://localhost:5000/queries') // Assuming this endpoint gives all queries
+        fetch('https://product-reco-server.vercel.app/queries') // Assuming this endpoint gives all queries
             .then(res => res.json())
             .then(data => {
                 const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -28,7 +28,7 @@ const Queries = () => {
             return;
         }
         try {
-            const res = await fetch(`http://localhost:5000/queries/like/${id}`, {
+            const res = await fetch(`https://product-reco-server.vercel.app/queries/like/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userEmail: user.email })
@@ -50,7 +50,7 @@ const Queries = () => {
                 // Re-fetch to ensure like counts are updated accurately from backend, if needed
                 // For a highly dynamic feed, a WebSocket or more sophisticated state management might be better,
                 // but for a simple refresh, this works.
-                const updated = await fetch('http://localhost:5000/queries').then(res => res.json());
+                const updated = await fetch('https://product-reco-server.vercel.app/queries').then(res => res.json());
                 setQueries(updated.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))); // Re-sort after fetch
             } else {
                 alert("Failed to update like.");

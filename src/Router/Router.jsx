@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoutes> <QuaryDetails></QuaryDetails></PrivetRoutes>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/queries/${params.id}`)
+        loader: ({ params }) => fetch(`https://product-reco-server.vercel.app/queries/${params.id}`)
       },
 
       {

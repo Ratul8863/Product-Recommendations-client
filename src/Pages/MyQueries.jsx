@@ -15,7 +15,7 @@ const MyQueries = () => {
 
   // useEffect(() => {
   //   if (user?.email) {
-  //     fetch(`http://localhost:5000/queries?email=${user.email}`)
+  //     fetch(`https://product-reco-server.vercel.app/queries?email=${user.email}`)
   //       .then(res => res.json())
   //       .then(data => setQueries(data));
   //   }
@@ -24,7 +24,7 @@ const MyQueries = () => {
 
   useEffect(() => {
   if (user?.email) {
-    fetch(`http://localhost:5000/queries?email=${user.email}`, {
+    fetch(`https://product-reco-server.vercel.app/queries?email=${user.email}`, {
       method: 'GET',
       credentials: 'include', // ✅ Send JWT cookie
     })
@@ -38,7 +38,7 @@ const MyQueries = () => {
     const confirm = window.confirm("Are you sure you want to delete this query?");
     if (!confirm) return;
 
-    const res = await fetch(`http://localhost:5000/queries/${id}`, {
+    const res = await fetch(`https://product-reco-server.vercel.app/queries/${id}`, {
       method: 'DELETE'
     });
 
@@ -67,7 +67,7 @@ const MyQueries = () => {
     e.preventDefault();
     setIsUpdating(true);
 
-    const res = await fetch(`http://localhost:5000/queries/${selectedQuery._id}`, {
+    const res = await fetch(`https://product-reco-server.vercel.app/queries/${selectedQuery._id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -80,7 +80,7 @@ const MyQueries = () => {
       alert("Query updated!");
       setModalIsOpen(false);
 
-      const updated = await fetch(`http://localhost:5000/queries?email=${user.email}`);
+      const updated = await fetch(`https://product-reco-server.vercel.app/queries?email=${user.email}`);
       const updatedData = await updated.json();
       setQueries(updatedData);
     } else {

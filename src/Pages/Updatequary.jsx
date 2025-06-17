@@ -7,7 +7,7 @@ function Updatequary() {
   const [queryData, setQueryData] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/queries/${id}`)
+    fetch(`https://product-reco-server.vercel.app/queries/${id}`)
       .then(res => res.json())
       .then(data => setQueryData(data));
   }, [id]);
@@ -24,7 +24,7 @@ function Updatequary() {
       boycottingReason: form.boycottingReason.value,
     };
 
-    const res = await fetch(`http://localhost:5000/queries/${id}`, {
+    const res = await fetch(`https://product-reco-server.vercel.app/queries/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedQuery)

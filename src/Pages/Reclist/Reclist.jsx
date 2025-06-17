@@ -12,14 +12,14 @@ function Reclist({ myRecPromise }) {
     if (!confirm) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/recommendations/${recId}`, {
+      const res = await fetch(`https://product-reco-server.vercel.app/recommendations/${recId}`, {
         method: 'DELETE',
       });
 
       const data = await res.json();
       console.log(data)
       if (data.success) {
-        await fetch(`http://localhost:5000/queries/${queryId}/decrease-recommendation`, {
+        await fetch(`https://product-reco-server.vercel.app/queries/${queryId}/decrease-recommendation`, {
           method: 'PATCH',
         });
 
