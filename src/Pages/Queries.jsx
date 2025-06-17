@@ -13,7 +13,7 @@ const Queries = () => {
 
     useEffect(() => {
         // Fetch all queries, sorted in descending order of creation date
-        fetch('https://product-reco-server.vercel.app/queries') // Assuming this endpoint gives all queries
+        fetch('https://product-reco-server.vercel.app/queries/all') // Assuming this endpoint gives all queries
             .then(res => res.json())
             .then(data => {
                 const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

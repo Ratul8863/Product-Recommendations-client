@@ -9,7 +9,7 @@ const RecommendationsForMe = () => {
 
   // useEffect(() => {
   //   if (user?.email) {
-  //     fetch(`https://product-reco-server.vercel.app/recommendations/user/${user.email}`), {
+  //     fetch(`http://localhost:5000/recommendations/user/${user.email}`), {
   //     method: 'GET',
   //     credentials: 'include' // ✅ this is required for JWT cookie to be sent
   //   }
@@ -20,7 +20,7 @@ const RecommendationsForMe = () => {
 
   useEffect(() => {
   if (user?.email) {
-    fetch(`https://product-reco-server.vercel.app/recommendations/user/${user.email}`, {
+    fetch(`http://localhost:5000/recommendations/user/${user.email}`, {
       method: 'GET',
       credentials: 'include' // ✅ this is required for JWT cookie to be sent
     })
@@ -40,7 +40,7 @@ const RecommendationsForMe = () => {
   //   const confirm = window.confirm("Are you sure you want to delete this recommendation?");
   //   if (!confirm) return;
 
-  //   const res = await fetch(`https://product-reco-server.vercel.app/recommendations/${id}`, {
+  //   const res = await fetch(`http://localhost:5000/recommendations/${id}`, {
   //     method: "DELETE",
   //   });
 

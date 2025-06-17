@@ -18,14 +18,13 @@ function Reclist({ myRecPromise }) {
 
       const data = await res.json();
       console.log(data)
-      if (data.success) {
-        await fetch(`https://product-reco-server.vercel.app/queries/${queryId}/decrease-recommendation`, {
-          method: 'PATCH',
-        });
-
-        setRecommendations(prev => prev.filter(r => r._id !== recId));
+      setRecommendations(prev => prev.filter(r => r._id !== recId));
         toast.success("Recommendation deleted and count updated.");
-      }
+      // if (data.success) {
+      //   await fetch(`https://product-reco-server.vercel.app/queries/${queryId}/decrease-recommendation`, {
+      //     method: 'PATCH',
+      //   });  
+      // }
     } catch (err) {
       console.error('Delete error:', err);
     }
