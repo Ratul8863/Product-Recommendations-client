@@ -357,8 +357,7 @@ const RecentFeed = () => {
                         <span className="text-xs mt-1">Login</span>
                     </Link>
                 )}
-
-                <h1>h</h1>
+                
             </div>
         </div>
     );
