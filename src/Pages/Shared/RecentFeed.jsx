@@ -358,7 +358,7 @@ const RecentFeed = () => {
                     </Link>
                 )}
 
-                <h1>hii</h1>
+                <h1>h</h1>
             </div>
         </div>
     );
