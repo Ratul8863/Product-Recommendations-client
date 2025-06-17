@@ -13,13 +13,26 @@ const MyQueries = () => {
   const [formData, setFormData] = useState({});
   const [isUpdating, setIsUpdating] = useState(false);
 
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`http://localhost:5000/queries?email=${user.email}`)
+  //       .then(res => res.json())
+  //       .then(data => setQueries(data));
+  //   }
+  // }, [user]);
+
+
   useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:5000/queries?email=${user.email}`)
-        .then(res => res.json())
-        .then(data => setQueries(data));
-    }
-  }, [user]);
+  if (user?.email) {
+    fetch(`http://localhost:5000/queries?email=${user.email}`, {
+      method: 'GET',
+      credentials: 'include', // ✅ Send JWT cookie
+    })
+      .then(res => res.json())
+      .then(data => setQueries(data))
+      .catch(err => console.error('Error fetching queries:', err));
+  }
+}, [user]);
 
   const handleDelete = async (id) => {
     const confirm = window.confirm("Are you sure you want to delete this query?");
