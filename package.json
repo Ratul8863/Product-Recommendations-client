@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.8",
+    "axios": "^1.10.0",
+    "cookie-parser": "^1.4.7",
     "fade": "^0.2.0",
     "firebase": "^11.8.1",
     "lottie-react": "^2.4.1",

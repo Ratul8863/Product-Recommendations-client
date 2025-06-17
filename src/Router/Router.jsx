@@ -15,6 +15,8 @@ import { createBrowserRouter } from "react-router";
 import NotFound from "../Pages/NotFound";
 import Addquary from "../Pages/Addquary";
 import Updatequary from "../Pages/Updatequary";
+import About from "../Pages/About";
+import Features from "../Pages/Features";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +66,18 @@ export const router = createBrowserRouter([
         path: "/recommendations-for-me",
         element: (
           <PrivetRoutes> <RecommendationsForMe></RecommendationsForMe></PrivetRoutes>
+        ),
+      },
+       {
+        path: "/about",
+        element: (
+          <About></About>
+        ),
+      },
+      {
+        path: "/features",
+        element: (
+          <Features></Features>
         ),
       },
     ],

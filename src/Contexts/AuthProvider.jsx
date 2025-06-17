@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { AuthContext } from './AuthContext';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../Firebase/firebase.init';
+import axios from 'axios';
 
 
 
@@ -29,14 +30,32 @@ const SignInwithGoogle = () =>
 }
 
 
-
+const updateuser = (updated) => updateProfile(auth.currentUser, updated);
    
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-    setRecommender(recommender)
+    // setRecommender(recommender)
             setLoading(false);
+            
+
+        if(currentUser?.email){
+            const userData = {email : currentUser.email}
+axios.post('http://localhost:5000/jwt', userData,{
+    withCredentials : true
+})
+.then (res =>{
+    console.log('Token after JWT',res.data)
+    // const token = res.data.token;
+    // localStorage.setItem('token',token)
+})
+.catch(error =>{
+    console.log(error)
+})
+        }
+
+
         });
         return () => unsubscribe();
     }, []);
@@ -48,7 +67,10 @@ const SignInwithGoogle = () =>
 setRecommender,
         createuser,
         SignInuser,
-        SignInwithGoogle
+        SignInwithGoogle,
+        updateuser,
+        setUser,
+        setLoading
     };
 
     return (

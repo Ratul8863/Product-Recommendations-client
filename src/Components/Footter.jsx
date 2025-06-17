@@ -1,101 +1,120 @@
 import React from 'react';
-import { FaTwitter, FaYoutube } from 'react-icons/fa';
-import { FaFacebook } from 'react-icons/fa6';
-import { Link, NavLink } from 'react-router-dom';
-
-import { FaLinkedin } from "react-icons/fa";
+import { FaTwitter, FaYoutube, FaFacebookF, FaLinkedinIn } from 'react-icons/fa'; // Updated Facebook icon, added LinkedIn icon
+import { Link } from 'react-router-dom'; // Using Link for internal navigation
 
 function Footer() {
   return (
     <>
       {/* Top Section */}
-      <footer className=" bg-gradient-to-br from-slate-100 to-slate-200  dark:shadow-blue-600 dark:from-gray-950 dark:to-gray-800 text-gray-800 dark:text-gray-200 px-10 py-12 grid grid-cols-2 md:justify-center md:grid-cols-3 gap-8">
-        <div className=' md:text-center'>
-          <h6 className="text-xl font-semibold mb-4">Hobbies</h6>
-          <ul className="space-y-2">
-            {["Drawing & Painting",
-    "Photography",
-    "Video Gaming",
-    "Fishing",
-    "Running",
-    "Cooking",
-    "Reading",
-    "Writing",].map((item, i) => (
-              <li key={i} >
-            <a className="hover:underline hover:text-blue-600 dark:hover:text-blue-400  transition duration-200 cursor-pointer" >
-{item}
-            </a>
-                  
-   
-              </li>
-            ))}
+      <footer className="bg-gradient-to-br from-[#1c1f3b] to-[#0D1128] text-gray-200 px-8 py-12 grid grid-cols-2 md:grid-cols-3 gap-8 border-t border-gray-700 shadow-inner">
+        {/* Explore Section (Replaced Hobbies) */}
+        <div className='text-center md:text-left'>
+          <h6 className="text-xl font-bold mb-5 text-lime-400">Explore</h6>
+          <ul className="space-y-3">
+            <li>
+              <Link to="/queries" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                All Queries
+              </Link>
+            </li>
+            <li>
+              <Link to="/add-query" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                Add New Query
+              </Link>
+            </li>
+            <li>
+              <Link to="/popular-queries" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                Popular Queries
+              </Link>
+            </li>
+            <li>
+              <Link to="/brands" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                Browse Brands
+              </Link>
+            </li>
           </ul>
         </div>
 
-        <div className='md:text-center'>
-          <h6 className="text-xl font-semibold mb-4">Company</h6>
-          <ul className="space-y-2">
-            {["About Us", "Contact", "Support"].map((item, i) => (
-              <li key={i}>
-                <a className="hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition duration-200 cursor-pointer">
-                  {item}
-                </a>
-              </li>
-            ))}
+        {/* Company Section */}
+        <div className='text-center md:text-left'>
+          <h6 className="text-xl font-bold mb-5 text-lime-400">Company</h6>
+          <ul className="space-y-3">
+            <li>
+              <Link to="/about" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link to="/support" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                Support
+              </Link>
+            </li>
           </ul>
         </div>
 
-        <div className='md:text-center'>
-          <h6 className="text-xl font-semibold mb-4">Legal</h6>
-          <ul className="space-y-2">
-            {["Terms of Use", "Privacy Policy", "Cookie Policy"].map((item, i) => (
-              <li key={i}>
-                <a className="hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition duration-200 cursor-pointer">
-                  {item}
-                </a>
-              </li>
-            ))}
+        {/* Legal Section */}
+        <div className='text-center md:text-left'>
+          <h6 className="text-xl font-bold mb-5 text-lime-400">Legal</h6>
+          <ul className="space-y-3">
+            <li>
+              <Link to="/terms" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                Terms of Use
+              </Link>
+            </li>
+            <li>
+              <Link to="/privacy" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link to="/cookie" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
+                Cookie Policy
+              </Link>
+            </li>
           </ul>
         </div>
       </footer>
 
       {/* Bottom Section */}
-      <footer className="flex  flex-col md:flex-row items-center justify-between bg-slate-300 dark:bg-gray-900 px-10 py-6 text-sm text-gray-700 dark:text-gray-300 border-t border-gray-400 dark:border-gray-600">
+      <footer className="flex flex-col md:flex-row items-center justify-between bg-gray-900 px-8 py-6 text-sm text-gray-400 border-t border-gray-700">
         {/* Branding */}
-        <Link onClick={()=>window.scrollTo(0,0)} to="/" className="flex items-center gap-3 mb-4 md:mb-0">
-          <img src="https://i.ibb.co/39WLdycb/image.png" alt="Logo" className="w-10 h-10" />
+        <Link onClick={() => window.scrollTo(0, 0)} to="/" className="flex items-center gap-3 mb-4 md:mb-0">
+          {/* Using a themed placeholder logo. Replace with your actual dark-theme compatible logo. */}
+          <img
+            src="https://placehold.co/40x40/1c1f3b/a3e635?text=Logo" // Dark background, lime text
+            alt="RecoSys Logo"
+            className="w-10 h-10 rounded-full border border-lime-400"
+          />
           <div>
-            <p className="text-lg font-bold text-black dark:text-white">Query Sysetem</p>
-            <p className="text-sm">Connecting  since 2025</p>
-             
+            <p className="text-xl font-bold text-lime-400">RecoSys</p> {/* Changed to RecoSys and lime color */}
+            <p className="text-sm text-gray-500">Connecting insights since 2025</p> {/* More relevant tagline */}
           </div>
         </Link>
- <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
+
+        {/* Copyright */}
+        <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
+
         {/* Social Links */}
-        <div className="flex gap-5">
+        <div className="flex gap-6 mt-4 md:mt-0">
           {/* Twitter */}
-          <a href="https://twitter.com" className='className="w-6  h-8 hover:text-blue-900 text-blue-500 dark:hover:text-blue-400 transition"' target="_blank" rel="noreferrer">
-           
-             <FaTwitter size={30}></FaTwitter>
-            
+          <a href="https://twitter.com" className="text-gray-400 hover:text-blue-400 transition-colors duration-200" target="_blank" rel="noreferrer" aria-label="Twitter">
+            <FaTwitter size={28} />
           </a>
           {/* YouTube */}
-          <a href="https://www.youtube.com" className="w-6 h-6  hover:text-red-800  text-red-600 dark:hover:text-red-400 transition" target="_blank" rel="noreferrer">
-          
-              <FaYoutube size={30}></FaYoutube>
-           
+          <a href="https://www.youtube.com" className="text-gray-400 hover:text-red-500 transition-colors duration-200" target="_blank" rel="noreferrer" aria-label="YouTube">
+            <FaYoutube size={28} />
           </a>
           {/* Facebook */}
-          <a href="https://www.facebook.com" className="w-full   hover:text-blue-700 dark:hover:text-blue-500 transition" target="_blank" rel="noreferrer">
-          
-            <FaFacebook size={30}></FaFacebook>
-          
+          <a href="https://www.facebook.com" className="text-gray-400 hover:text-blue-600 transition-colors duration-200" target="_blank" rel="noreferrer" aria-label="Facebook">
+            <FaFacebookF size={28} /> {/* Using FaFacebookF for solid icon */}
           </a>
-
-           <a href="https://www.linkedin.com" className="w-full   hover:text-blue-700 dark:hover:text-blue-500 transition" target="_blank" rel="noreferrer">
-          
-           <FaLinkedin size={30}/>
-          
+          {/* LinkedIn */}
+          <a href="https://www.linkedin.com" className="text-gray-400 hover:text-blue-700 transition-colors duration-200" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+            <FaLinkedinIn size={28} /> {/* Using FaLinkedinIn for solid icon */}
           </a>
         </div>
       </footer>

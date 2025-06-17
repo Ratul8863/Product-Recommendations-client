@@ -2,13 +2,18 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Contexts/AuthContext';
 import Lottie from 'lottie-react';
 import login from '../assets/loginman.json';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SignInWithGoogle from './Shared/SignInWithGoogle';
 
 function Login() {
+  const location = useLocation();
+  const from = location.state || '/'
+  console.log(from)
+  console.log(location.state)
+  const navigate = useNavigate();
   const { SignInuser } = useContext(AuthContext);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+
 
   const handleSignin = (e) => {
     e.preventDefault();
@@ -19,7 +24,7 @@ function Login() {
     SignInuser(email, password)
       .then((userCredential) => {
         console.log(userCredential.user);
-        navigate('/');
+        navigate(from);
       })
       .catch((error) => {
         setError(error.message);
@@ -38,7 +43,7 @@ function Login() {
         <div className="flex flex-col justify-center">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Sign In to Your Account</h2>
 
-          <SignInWithGoogle />
+          <SignInWithGoogle from={from} />
 
           <form onSubmit={handleSignin} className="space-y-4 mt-4">
             <div>
@@ -76,7 +81,7 @@ function Login() {
 
           <p className="mt-4 text-sm text-center">
             Don't have an account?{' '}
-            <Link to="/register" className="text-blue-600 hover:underline">
+            <Link to="/register" state={location.state} className="text-blue-600 hover:underline">
               Register here
             </Link>
           </p>

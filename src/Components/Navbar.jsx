@@ -7,6 +7,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaPhoneAlt, FaEnvelope, FaClock } 
 
 function Navbar() {
   const { user } = useContext(AuthContext);
+  console.log(user)
 
   const handleSignOut = () => {
     signOut(auth).catch((error) => console.error("Logout error:", error));
