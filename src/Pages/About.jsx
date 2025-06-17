@@ -2,6 +2,7 @@ import React, { useContext } from 'react'; // Import useContext
 import { FaRegLightbulb, FaExchangeAlt, FaUsers, FaCheckCircle, FaSearch, FaPlusCircle, FaCommentAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthContext'; // Import AuthContext
+import { Helmet } from 'react-helmet-async';
 
 const About = () => {
     const { user } = useContext(AuthContext); // Get user from AuthContext
@@ -11,6 +12,9 @@ const About = () => {
 
     return (
         <div className="min-h-screen bg-[#0D1128] text-white font-sans py-16 px-4 sm:px-6 lg:px-8">
+             <Helmet>
+                         <title>RecoSys | About</title>
+                        </Helmet>
             <div className="max-w-4xl mx-auto text-center">
                 <h1 className="text-6xl font-extrabold text-lime-400 mb-8 drop-shadow-lg leading-tight animate-fade-in-down">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-lime-300 to-lime-600">

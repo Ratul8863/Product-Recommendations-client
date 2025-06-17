@@ -12,6 +12,7 @@ import {
     FaEye             // For viewing details
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Features = () => {
     const { user } = useContext(AuthContext); // Get user from AuthContext
@@ -54,6 +55,9 @@ const Features = () => {
 
     return (
         <div className="min-h-screen bg-[#0D1128] text-white font-sans py-16 px-4 sm:px-6 lg:px-8">
+             <Helmet>
+                         <title>RecoSys | Features</title>
+                        </Helmet>
             <div className="max-w-7xl mx-auto text-center">
                 <h1 className="text-6xl font-extrabold text-lime-400 mb-8 drop-shadow-lg leading-tight animate-fade-in-down">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-lime-300 to-lime-600">

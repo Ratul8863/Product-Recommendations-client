@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthContext';
 import Modal from 'react-modal';
+import { Helmet } from 'react-helmet-async';
 
 Modal.setAppElement('#root');
 
@@ -90,6 +91,9 @@ const MyQueries = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6 text-white">
+       <Helmet>
+                   <title>RecoSys | MyQueries</title>
+                  </Helmet>
       {/* Header Banner */}
       <div className="relative overflow-hidden bg-gradient-to-r from-lime-500 to-lime-300 text-[#0D1128] rounded-xl mb-12 shadow-lg">
         <div className="px-6 py-12 text-center">

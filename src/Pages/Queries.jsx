@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthContext'; // Assuming AuthContext is still needed for like functionality
 import { FcLike, FcDislike } from "react-icons/fc";
 import { FaCommentAlt, FaTh, FaThLarge, FaList, FaRegLightbulb, FaShareAlt, FaSearch, FaInfoCircle } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 const Queries = () => {
     const [queries, setQueries] = useState([]); // Renamed from recentQueries for clarity on this page
@@ -85,7 +86,11 @@ const Queries = () => {
     }[gridLayout];
 
     return (
+        
         <div className="min-h-screen bg-[#0D1128] text-white font-sans py-12 px-4 sm:px-6 lg:px-8">
+             <Helmet>
+                         <title>RecoSys | Queries</title>
+                        </Helmet>
             <div className="max-w-7xl mx-auto">
                 {/* Header Section */}
                 <div className="text-center mb-16">

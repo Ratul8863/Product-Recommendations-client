@@ -5,6 +5,7 @@ import HomeSlider from '../Components/HomeSlider';
 import RecentFeed from './Shared/RecentFeed';
 import ExtraSection1 from '../Components/ExtraSection1';
 import ExtraSection2 from '../Components/ExtraSection2';
+import { Helmet } from 'react-helmet-async';
 
 // --- Mock Components for demonstration ---
 // In a real application, these would be in separate files and imported.
@@ -14,6 +15,10 @@ const Home = () => {
  
   return (
     <div className='relative min-h-screen  '> {/* Added a dark background */}
+     <Helmet>
+             <title>RecoSys | Home</title>
+            </Helmet>
+
       <Banner />
       <div className='py-12 space-y-20 px-4 md:px-8 lg:px-16'>
 
