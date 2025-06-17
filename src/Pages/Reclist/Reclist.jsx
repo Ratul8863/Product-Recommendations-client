@@ -1,30 +1,33 @@
-import React, { use, useState } from 'react';
+import React from 'react';
+import { toast } from 'react-toastify';
 
-function Reclist({ myRecPromise }) {
-  const Recs = use(myRecPromise);
-  console.log(Recs)
-  const [recommendations, setRecommendations] = useState(Recs);
-
+function Reclist({ recommendations, setRecommendations }) {
   const handleDelete = async (recId, queryId) => {
     const confirm = window.confirm("Are you sure you want to delete this recommendation?");
     if (!confirm) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/recommendations/${recId}`, {
+      const res = await fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/recommendations/${recId}`, {
         method: 'DELETE',
       });
 
       const data = await res.json();
       if (data.deletedCount > 0) {
-        await fetch(`http://localhost:5000/queries/${queryId}/decrease-recommendation`, {
+        await fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/queries/${queryId}/decrease-recommendation`, {
           method: 'PATCH',
         });
 
-        setRecommendations(prev => prev.filter(r => r._id !== recId));
+        setRecommendations(prev => {
+          const updated = prev.filter(r => r._id !== recId);
+          console.log("Updated Recommendations List:", updated);
+          return updated;
+        });
+
         toast.success("Recommendation deleted and count updated.");
       }
     } catch (err) {
       console.error('Delete error:', err);
+      toast.error("Failed to delete recommendation.");
     }
   };
 
@@ -53,10 +56,7 @@ function Reclist({ myRecPromise }) {
               </tr>
             ) : (
               recommendations.map((rec, index) => (
-                <tr
-                  key={rec._id}
-                  className="hover:bg-[#2a2e4d] transition-colors duration-300"
-                >
+                <tr key={rec._id} className="hover:bg-[#2a2e4d] transition-colors duration-300">
                   <td className="p-4 border-t border-gray-700 text-gray-300">{index + 1}</td>
                   <td className="p-4 border-t border-gray-700 text-white font-medium">{rec.productName || "N/A"}</td>
                   <td className="p-4 border-t border-gray-700 text-white">{rec.queryTitle || "N/A"}</td>

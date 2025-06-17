@@ -1,3 +1,3 @@
 export const recforme = email =>{
-  return  fetch(`http://localhost:5000/queries?email=${email}`).then(res=>res.json())
+  return  fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/queries?email=${email}`).then(res=>res.json())
 }

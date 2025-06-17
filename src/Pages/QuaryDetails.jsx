@@ -27,7 +27,7 @@ const QueryDetails = () => {
 
   useEffect(() => {
     if (_id) {
-      fetch(`http://localhost:5000/recommendations/${_id}`)
+      fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/recommendations/${_id}`)
         .then(res => res.json())
         .then(data => setRecommendations(data));
     }
@@ -53,17 +53,19 @@ const QueryDetails = () => {
       recommendationReason: form.reason.value,
     };
 
-    const res = await fetch('http://localhost:5000/recommendations', {
+    const res = await fetch('https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/recommendations', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(recommendation),
+      credentials: 'include'
+      
     });
 
     const data = await res.json();
     if (data.insertedId) {
       alert('Recommendation submitted!');
       form.reset();
-      const updated = await fetch(`http://localhost:5000/recommendations/${_id}`);
+      const updated = await fetch(`https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/recommendations/${_id}`);
       const updatedData = await updated.json();
       setRecommendations(updatedData);
     }
