@@ -18,11 +18,14 @@ const RecentFeed = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/queries/recent')
-            .then(res => res.json())
-            .then(data => setRecentQueries(data))
-            .catch(error => console.error("Failed to fetch recent queries:", error));
-    }, []);
+  fetch('https://product-reco-server-i9d009gff-ratul8863s-projects.vercel.app/queries/recent', {
+    credentials: 'include'
+  })
+    .then(res => res.json())
+    .then(data => setRecentQueries(data))
+    .catch(error => console.error("Failed to fetch recent queries:", error));
+}, []);
+
 
     const handleLike = async (id) => {
         if (!user) {
