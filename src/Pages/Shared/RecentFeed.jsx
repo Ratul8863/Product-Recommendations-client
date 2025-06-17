@@ -332,7 +332,7 @@ const RecentFeed = () => {
                         </Link>
                     </div>
                 )}
-                <ExtraSection2 />
+              
             </aside>
 
             {/* Mobile Sticky Footer Navigation */}
