@@ -83,7 +83,7 @@ const Home = () => {
           </Link>
         </div>
 
-       
+        <ExtraSection1 />
         <ExtraSection2 />
 
       </div>
