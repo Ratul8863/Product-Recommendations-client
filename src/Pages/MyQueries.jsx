@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthContext';
 import Modal from 'react-modal';
 import { Helmet } from 'react-helmet-async';
+import Looding1 from './Shared/Looding/Looding1';
 
 Modal.setAppElement('#root');
 
@@ -13,34 +14,37 @@ const MyQueries = () => {
   const [selectedQuery, setSelectedQuery] = useState(null);
   const [formData, setFormData] = useState({});
   const [isUpdating, setIsUpdating] = useState(false);
-
-  // useEffect(() => {
-  //   if (user?.email) {
-  //     fetch(`https://product-reco-server.vercel.app/queries?email=${user.email}`)
-  //       .then(res => res.json())
-  //       .then(data => setQueries(data));
-  //   }
-  // }, [user]);
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  if (user?.email) {
-    fetch(`https://product-reco-server.vercel.app/queries?email=${user.email}`, {
-      method: 'GET',
-      credentials: 'include', // ✅ Send JWT cookie
-    })
-      .then(res => res.json())
-      .then(data => setQueries(data))
-      .catch(err => console.error('Error fetching queries:', err));
-  }
-}, [user]);
+    if (user?.email) {
+      setLoading(true);
+      fetch(`https://product-reco-server.vercel.app/queries?email=${user.email}`, {
+        method: 'GET',
+        credentials: 'include', // ✅ Send JWT cookie
+      })
+        .then(res => {
+          if (res.status === 401 || res.status === 403) {
+            throw new Error("Unauthorized. Please log in again.");
+          }
+          return res.json();
+        })
+        .then(data => setQueries(data))
+        .catch(err => {
+          console.error('Error fetching queries:', err);
+          alert(err.message);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [user]);
 
   const handleDelete = async (id) => {
     const confirm = window.confirm("Are you sure you want to delete this query?");
     if (!confirm) return;
 
     const res = await fetch(`https://product-reco-server.vercel.app/queries/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      credentials: 'include' // ✅ Important for JWT auth
     });
 
     const data = await res.json();
@@ -70,7 +74,10 @@ const MyQueries = () => {
 
     const res = await fetch(`https://product-reco-server.vercel.app/queries/${selectedQuery._id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include', // ✅ Send JWT cookie
       body: JSON.stringify(formData)
     });
 
@@ -81,7 +88,11 @@ const MyQueries = () => {
       alert("Query updated!");
       setModalIsOpen(false);
 
-      const updated = await fetch(`https://product-reco-server.vercel.app/queries?email=${user.email}`);
+      // Re-fetch updated list with JWT
+      const updated = await fetch(`https://product-reco-server.vercel.app/queries?email=${user.email}`, {
+        method: 'GET',
+        credentials: 'include'
+      });
       const updatedData = await updated.json();
       setQueries(updatedData);
     } else {
@@ -91,9 +102,10 @@ const MyQueries = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6 text-white">
-       <Helmet>
-                   <title>RecoSys | MyQueries</title>
-                  </Helmet>
+      <Helmet>
+        <title>RecoSys | MyQueries</title>
+      </Helmet>
+
       {/* Header Banner */}
       <div className="relative overflow-hidden bg-gradient-to-r from-lime-500 to-lime-300 text-[#0D1128] rounded-xl mb-12 shadow-lg">
         <div className="px-6 py-12 text-center">
@@ -110,7 +122,9 @@ const MyQueries = () => {
       </div>
 
       {/* Query Section */}
-      {queries.length === 0 ? (
+      {loading ? (
+        <Looding1 />
+      ) : queries.length === 0 ? (
         <div className="text-center mt-12">
           <h2 className="text-2xl font-semibold mb-4 text-gray-300">No queries found.</h2>
           <Link to="/add-query" className="bg-lime-500 hover:bg-lime-400 text-[#0D1128] px-4 py-2 rounded font-bold transition">
@@ -133,10 +147,13 @@ const MyQueries = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-x-2">
+                  <div className='  '>
+                    <div className="flex gap-x-2">
                     <Link to={`/query/${query._id}`} className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm font-medium">View</Link>
                     <button onClick={() => openModal(query)} className="bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-1 rounded text-sm font-medium">Update</button>
                     <button onClick={() => handleDelete(query._id)} className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm font-medium">Delete</button>
+                  </div>
+                  <h2 className="text-cyan-300 mt-1 "> <span className="font-semibold">Recommendations:</span> {query.recommendationCount || 0}</h2>
                   </div>
                 </div>
                 <h4 className="text-xl font-bold mt-3 text-lime-300">{query.queryTitle}</h4>

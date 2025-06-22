@@ -1,13 +1,14 @@
 import React, { use, useState } from 'react';
+import { Link } from 'react-router';
 import { toast } from 'react-toastify';
 
 function Reclist({ myRecPromise }) {
   const Recs = use(myRecPromise);
-  // console.log(recs)
+  
   const [recommendations, setRecommendations] = useState(Recs);
-
+  console.log(recommendations.queryId)
   const handleDelete = async (recId, queryId) => {
-    console.log(recId)
+    
     const confirm = window.confirm("Are you sure you want to delete this recommendation?");
     if (!confirm) return;
 
@@ -17,7 +18,7 @@ function Reclist({ myRecPromise }) {
       });
 
       const data = await res.json();
-      console.log(data)
+  
       setRecommendations(prev => prev.filter(r => r._id !== recId));
         toast.success("Recommendation deleted and count updated.");
       // if (data.success) {
@@ -29,6 +30,8 @@ function Reclist({ myRecPromise }) {
       console.error('Delete error:', err);
     }
   };
+
+
 
   return (
     <div className="max-w-6xl mx-auto p-6 text-white font-sans min-h-screen">
@@ -60,8 +63,13 @@ function Reclist({ myRecPromise }) {
                   className="hover:bg-[#2a2e4d] transition-colors duration-300"
                 >
                   <td className="p-4 border-t border-gray-700 text-gray-300">{index + 1}</td>
-                  <td className="p-4 border-t border-gray-700 text-white font-medium">{rec.productName || "N/A"}</td>
-                  <td className="p-4 border-t border-gray-700 text-white">{rec.queryTitle || "N/A"}</td>
+                  <td className="p-4 border-t border-gray-700 text-white font-medium"> <Link to={`/query/${rec.queryId}`}>
+                 {rec.productName || "N/A"}
+                  </Link></td>
+                 
+                   <td className="p-4 border-t border-gray-700 text-white"><Link to={`/query/${rec.queryId}`}>
+               {rec.queryTitle || "N/A"}
+                  </Link></td>
                   <td className="p-4 border-t border-gray-700 text-gray-400">
                     {new Date(rec.createdAt).toLocaleString()}
                   </td>

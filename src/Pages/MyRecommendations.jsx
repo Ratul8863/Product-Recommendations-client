@@ -9,7 +9,7 @@ const MyRecommendations = () => {
   const { user,recommender} = useContext(AuthContext);
   const [recommendations, setRecommendations] = useState([]);
 
-console.log("Loged in user",user.email)
+
   return (
 
     <>

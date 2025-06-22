@@ -6,6 +6,8 @@ import ExtraSection2 from '../../Components/ExtraSection2';
 import { FcLike, FcDislike } from "react-icons/fc";
 import { FaCommentAlt, FaTh, FaThLarge, FaList } from 'react-icons/fa'; // Added icons for layouts
 import { MdShare, MdFilterList, MdOutlineClose } from 'react-icons/md'; // Added filter and close icons
+import Looding1 from './Looding/Looding1';
+import { toast } from 'react-toastify';
 
 const RecentFeed = () => {
     const [recentQueries, setRecentQueries] = useState([]);
@@ -15,15 +17,17 @@ const RecentFeed = () => {
     const [gridLayout, setGridLayout] = useState(2);
     const [showFilters, setShowFilters] = useState(false); // State to toggle filter visibility
     const { user } = useContext(AuthContext);
+       const [loading, setLoading] = useState(true);
+
     const navigate = useNavigate();
 
     useEffect(() => {
-  fetch('https://product-reco-server.vercel.app/queries/recent', {
-    credentials: 'include'
-  })
+         setLoading(true);
+  fetch('https://product-reco-server.vercel.app/queries/recent')
     .then(res => res.json())
     .then(data => setRecentQueries(data))
-    .catch(error => console.error("Failed to fetch recent queries:", error));
+    .catch(error => console.error("Failed to fetch recent queries:", error))
+    .finally(() => setLoading(false));
 }, []);
 
 
@@ -92,7 +96,13 @@ const RecentFeed = () => {
         2: 'grid-cols-1 md:grid-cols-2',
         3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
     }[gridLayout];
-
+const handleGridLayoutClick = (a) => {
+  if (window.innerWidth < 768) {
+    toast.error("Use a larger device to enable grid layout");
+    return;
+  }
+  setGridLayout(a);
+};
     return (
         <div className="min-h-screen bg-[#0D1128] flex flex-col lg:flex-row font-sans ">
             {/* Left Sidebar - Desktop */}
@@ -123,10 +133,11 @@ const RecentFeed = () => {
                             <FaList size={20} />
                         </button>
                         <button
-                            onClick={() => setGridLayout(2)}
-                            className={`p-2 rounded-lg transition-colors duration-200 ${gridLayout === 2 ? 'bg-lime-400 text-black' : 'text-gray-400 hover:bg-gray-700'}`}
+                            onClick={() => handleGridLayoutClick(2)}
+                            className={`p-2 rounded-lg sm:disabled md:grid transition-colors duration-200 ${gridLayout === 2 ? 'bg-lime-400 text-black' : 'text-gray-400 hover:bg-gray-700'}`}
                             title="2 Column Layout"
                         >
+                           
                             <FaTh size={20} />
                         </button>
                        
@@ -183,8 +194,10 @@ const RecentFeed = () => {
                         </div>
                     </div>
                 )}
-
-                {filteredQueries.length === 0 ? (
+{loading ? (
+                    <Looding1 />
+                ) :
+                filteredQueries.length === 0 ? (
                     <p className="text-center text-gray-400 text-lg mt-10">No queries found matching your criteria. Try adjusting your filters!</p>
                 ) : (
                     <div className={`grid ${gridColsClass} gap-6 mx-auto`}>
@@ -253,7 +266,7 @@ const RecentFeed = () => {
                                     <div className="flex justify-around border-t border-gray-700 pt-4 text-sm text-gray-400 mt-auto">
                                         <button
                                             onClick={(e) => { e.stopPropagation(); handleLike(query._id); }}
-                                            className="hover:text-lime-300 flex items-center gap-2 cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 rounded-md px-2 py-1"
+                                            className="hover:text-lime-300 flex items-center gap-2 cursor-pointer transition-colors duration-200    rounded-md px-2 py-1"
                                             aria-label={isLiked ? "Unlike" : "Like"}
                                         >
                                             {isLiked ? <FcDislike className='text-red-500' size={24} /> : <FcLike size={24} />}
@@ -339,7 +352,7 @@ const RecentFeed = () => {
             </aside>
 
             {/* Mobile Sticky Footer Navigation */}
-            <div className="lg:hidden fixed bottom-0 left-0 w-full bg-[#1c1f3b] border-t border-gray-700 py-3 px-4 flex justify-around items-center z-50 shadow-lg">
+            <div className="lg:hidden  left-0 w-full  bg-[#1c1f3b] border-t border-gray-700 py-3 px-4 flex justify-around items-center z-50 shadow-lg">
                 <Link to="/" className="flex flex-col items-center text-gray-400 hover:text-lime-400 transition-colors duration-200">
                     <FaCommentAlt size={20} />
                     <span className="text-xs mt-1">Feed</span>

@@ -8,7 +8,7 @@ import Looding1 from '../../Pages/Shared/Looding/Looding1';
 
 function PrivetRoutes({ children }) {
  const location = useLocation();
-    console.log(location)
+
 
 
     const { user, loading } = useContext(AuthContext);

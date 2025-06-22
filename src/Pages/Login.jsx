@@ -8,8 +8,7 @@ import SignInWithGoogle from './Shared/SignInWithGoogle';
 function Login() {
   const location = useLocation();
   const from = location.state || '/'
-  console.log(from)
-  console.log(location.state)
+
   const navigate = useNavigate();
   const { SignInuser } = useContext(AuthContext);
   const [error, setError] = useState('');
@@ -23,7 +22,7 @@ function Login() {
 
     SignInuser(email, password)
       .then((userCredential) => {
-        console.log(userCredential.user);
+      
         navigate(from);
       })
       .catch((error) => {
@@ -32,7 +31,7 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-200 via-blue-200 to-pink-200 flex items-center justify-center px-4 py-10 md:py-0">
+    <div className="min-h-screen bg-gradient-to-br from-purple-200 via-blue-200 to-pink-200 flex items-center justify-center px-4 py-10 ">
       <div className="bg-white/30 backdrop-blur-md rounded-2xl shadow-lg max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 p-6 md:p-12">
         {/* Animation */}
         <div className="flex items-center justify-center">

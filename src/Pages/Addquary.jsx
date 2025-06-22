@@ -3,12 +3,14 @@ import { AuthContext } from "../Contexts/AuthContext";
 // Removed useParams as it's not used in the form submission logic for adding a query
 // import { useParams } from "react-router";
 import { FaPlusCircle, FaTimes, FaCheckCircle } from 'react-icons/fa'; // Icons for button and alert
+import { Link,  useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const AddQuery = () => {
   const { user } = useContext(AuthContext);
   // Removed jobid as it was not used for the 'AddQuery' functionality
   // const {id : jobid} = useParams();
-  // console.log(jobid)
+const navigate = useNavigate()
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -55,15 +57,19 @@ const AddQuery = () => {
 
     try {
       const res = await fetch("https://product-reco-server.vercel.app/queries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newQuery),
-      });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  credentials: "include", // ✅ Include the JWT cookie in the request
+  body: JSON.stringify(newQuery),
+});
+
 
       const data = await res.json();
       if (data.insertedId) {
-        showCustomAlert("Query added successfully! Your contribution is live.", "success");
+        toast.success("Query added successfully! Your contribution is live.", "success");
+  
         form.reset();
+       
       } else {
         showCustomAlert("Failed to add query. Please try again.", "error");
       }
@@ -71,6 +77,7 @@ const AddQuery = () => {
       console.error("Error adding query:", error);
       showCustomAlert("An error occurred while adding the query.", "error");
     }
+ navigate('/queries')
   };
 
   return (
@@ -141,7 +148,8 @@ const AddQuery = () => {
               required
             />
           </div>
-          <button
+        
+                <button
             type="submit"
             className="w-full bg-gradient-to-r from-lime-500 to-lime-300 text-black font-extrabold text-lg
             px-8 py-4 rounded-full shadow-2xl hover:shadow-lime-400/70
@@ -152,6 +160,7 @@ const AddQuery = () => {
             <span className="relative z-10">Add Query</span>
             <FaPlusCircle className="relative z-10 text-xl" />
           </button>
+                  
         </form>
       </div>
 

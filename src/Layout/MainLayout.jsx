@@ -11,7 +11,9 @@ function MainLayout() {
     <>
     <div className=''>
 
-<Navbar></Navbar>
+<div className='mb-14  md:mb-24'>
+  <Navbar></Navbar>
+</div>
 {
   loading ? <Looding1></Looding1> : <Outlet></Outlet>
 }

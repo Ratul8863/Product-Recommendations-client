@@ -27,7 +27,10 @@ const QueryDetails = () => {
 
   useEffect(() => {
     if (_id) {
-      fetch(`https://product-reco-server.vercel.app/recommendations/${_id}`)
+      fetch(`https://product-reco-server.vercel.app/recommendations/${_id}`, {
+        method: 'GET',
+        credentials: 'include'
+      })
         .then(res => res.json())
         .then(data => setRecommendations(data));
     }
@@ -36,7 +39,7 @@ const QueryDetails = () => {
   const handleRecommendation = async (e) => {
     e.preventDefault();
     const form = e.target;
-
+console.log(_id)
     const recommendation = {
       queryId: _id,
       queryTitle,
@@ -65,7 +68,10 @@ const QueryDetails = () => {
     if (data.insertedId) {
       alert('Recommendation submitted!');
       form.reset();
-      const updated = await fetch(`https://product-reco-server.vercel.app/recommendations/${_id}`);
+      const updated = await fetch(`https://product-reco-server.vercel.app/recommendations/${_id}`, {
+        method: 'GET',
+        credentials: 'include'
+      });
       const updatedData = await updated.json();
       setRecommendations(updatedData);
     }
@@ -90,7 +96,7 @@ const QueryDetails = () => {
       </div>
 
       {/* Recommendation Form */}
-      <div className="bg-gradient-to-r from-lime-800 to-lime-700 text-black p-6 rounded-2xl shadow-lg mb-12">
+      <div className="bg-gradient-to-r from-lime-800 to-lime-700 text-amber-600  p-6 rounded-2xl shadow-lg mb-12">
         <h3 className="text-2xl font-bold mb-4">Add a Recommendation</h3>
         <form onSubmit={handleRecommendation} className="space-y-4">
           <input

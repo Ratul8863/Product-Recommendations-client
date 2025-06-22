@@ -3,18 +3,18 @@ import { AuthContext } from '../Contexts/AuthContext';
 import { Link, NavLink } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../Firebase/firebase.init';
-import { FaFacebookF, FaTwitter, FaInstagram, FaPhoneAlt, FaEnvelope, FaClock } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaPhoneAlt, FaEnvelope, FaClock, FaYoutube } from "react-icons/fa";
 
 function Navbar() {
   const { user } = useContext(AuthContext);
-  console.log(user)
+
 
   const handleSignOut = () => {
     signOut(auth).catch((error) => console.error("Logout error:", error));
   };
 
   return (
-  <div className="w-full shadow z-50  ">
+  <div className="w-full shadow  fixed top-0 left-0 right-0 z-500  ">
   {/* Top Info Bar */}
   <div className="hidden  md:flex justify-between items-center px-6 py-2 text-sm bg-[#0D1128] text-lime-400 font-medium ">
     <div className="flex items-center gap-4">
@@ -23,9 +23,9 @@ function Navbar() {
       <span className="flex items-center gap-1"><FaClock /> Mon-Sat: 10 am to 7 pm</span>
     </div>
     <div className="flex gap-3 text-lime-300 text-lg">
-      <FaFacebookF className="hover:text-white cursor-pointer" />
-      <FaTwitter className="hover:text-white cursor-pointer" />
-      <FaInstagram className="hover:text-white cursor-pointer" />
+     <Link to={'https://www.facebook.com'}> <FaFacebookF className="hover:text-white cursor-pointer" /></Link>
+      <Link to={'https://twitter.com'}><FaTwitter className="hover:text-white cursor-pointer" /></Link>
+      <Link to={'https://www.youtube.com'}>  <FaYoutube className="hover:text-white cursor-pointer" /></Link>
     </div>
   </div>
 
@@ -36,9 +36,9 @@ function Navbar() {
     
     <div className="navbar-start">
       {/* Mobile Menu - Hamburger */}
-<div className="md:hidden  ">
+<div className="lg:hidden  ">
   <div className="dropdown ">
-    <button tabIndex={0} className="btn btn-ghost text-lime-400 hover:bg-lime-700 md:hidden">
+    <button tabIndex={0} className="btn btn-ghost text-lime-400 hover:bg-lime-700 lg:hidden">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6"
@@ -67,7 +67,7 @@ function Navbar() {
 
       {user && (
         <>
-          <li><NavLink to="/recommendations-for-me">Recs for me</NavLink></li>
+          <li><NavLink to="/recommendations-for-me">Recommendations for me</NavLink></li>
           <li><NavLink to="/my-queries">My Queries</NavLink></li>
           <li><NavLink to="/my-recommendations">My Recommendation</NavLink></li>
         </>
@@ -122,7 +122,7 @@ function Navbar() {
           </button>
 
           <div className="absolute left-0 mt-2 w-48 bg-[#1c1f3b] rounded-md shadow-lg py-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-            <NavLink to="/recommendations-for-me" className="block px-4 py-2 text-sm text-white hover:bg-lime-500 hover:text-black rounded-md mx-1 my-1">Recs for me</NavLink>
+            <NavLink to="/recommendations-for-me" className="block px-4 py-2 text-sm text-white hover:bg-lime-500 hover:text-black rounded-md mx-1 my-1">Recommendations for me</NavLink>
             <NavLink to="/my-queries" className="block px-4 py-2 text-sm text-white hover:bg-lime-500 hover:text-black rounded-md mx-1 my-1">My Queries</NavLink>
             <NavLink to="/my-recommendations" className="block px-4 py-2 text-sm text-white hover:bg-lime-500 hover:text-black rounded-md mx-1 my-1">My Recommendation</NavLink>
           </div>

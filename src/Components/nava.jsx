@@ -7,7 +7,7 @@ import { auth } from '../Firebase/firebase.init';
 
 function Navbar() {
   const { user } = useContext(AuthContext);
-console.log(user)
+
   const handleSignOut = () => {
     signOut(auth).catch((error) => console.error("Logout error:", error));
   };

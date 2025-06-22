@@ -5,7 +5,7 @@ import { AuthContext } from '../../Contexts/AuthContext';
 
 
 function SignInWithGoogle({from}) {
-console.log()
+
   const navigate =useNavigate();
     const {SignInwithGoogle} = use(AuthContext);
     const handlebutton = () =>

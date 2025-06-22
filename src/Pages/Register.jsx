@@ -12,7 +12,7 @@ export default function Register() {
 const navigate =useNavigate()
  const location = useLocation();
   const from = location.state || '/'
- console.log(location)
+
 
   const handleRegister = (e) => {
   e.preventDefault();
@@ -128,10 +128,10 @@ const navigate =useNavigate()
           
 //         // });
 //         const user = res.user;
-//          console.log(user)
+//          (user)
 //         navigate(from);
 //       })
 //       .catch((err) => {
 //         setError(err.message);
-//         console.log(err)
+//    
 //       });

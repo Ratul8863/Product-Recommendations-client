@@ -76,7 +76,7 @@ const Home = () => {
 
         {/* Extra Section 4: Call to Action */}
         {/* Removed Fade component as react-awesome-reveal is not available */}
-        <div className="bg-gradient-to-r from-pink-600 to-purple-700 text-white shadow-2xl rounded-3xl p-6 md:p-10 text-center max-w-4xl mx-auto"> {/* Adjusted colors for dark theme */}
+        <div className="bg-gradient-to-r from-pink-600 to-purple-700  shadow-2xl rounded-3xl p-6 md:p-10 text-center max-w-4xl mx-auto"> {/* Adjusted colors for dark theme */}
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Share Your Voice?</h2>
           <p className="text-base md:text-lg mb-6">
             Post your queries or recommend ethical alternatives today. Your insights shape the future.

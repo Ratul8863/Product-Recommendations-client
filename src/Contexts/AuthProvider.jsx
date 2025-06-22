@@ -46,12 +46,12 @@ axios.post('https://product-reco-server.vercel.app/jwt', userData,{
     withCredentials : true
 })
 .then (res =>{
-    console.log('Token after JWT',res.data)
+
     // const token = res.data.token;
     // localStorage.setItem('token',token)
 })
 .catch(error =>{
-    console.log(error)
+ 
 })
         }
 
