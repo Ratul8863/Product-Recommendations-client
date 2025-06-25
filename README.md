@@ -38,15 +38,18 @@ To create a platform where users can post queries and receive helpful product re
 ## 🔧 Tech Stack & NPM Packages
 
 ### 🔨 Core Tech:
-- **React.js** (Vite)
-- **Tailwind CSS**
-- **Firebase Authentication**
-- **Axios** (`axios`)
-- **React Router DOM** (`react-router-dom`)
-- **React Toastify** (`react-toastify`)
-- **Lottie-react** (`lottie-react`) for animations
-- **React Icons** (`react-icons`)
-- **React Awesome Reveal** (`react-awesome-reveal`)
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![React Toastify](https://img.shields.io/badge/React_Toastify-1B1F23?style=for-the-badge&logo=react&logoColor=white)
+![Lottie](https://img.shields.io/badge/Lottie-000000?style=for-the-badge&logo=lottie&logoColor=00C1CC)
+![React Icons](https://img.shields.io/badge/React_Icons-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Awesome Reveal](https://img.shields.io/badge/React_Awesome_Reveal-purple?style=for-the-badge&logo=react&logoColor=white)
+
 
 
 ## 🛠️ How to Run Locally
