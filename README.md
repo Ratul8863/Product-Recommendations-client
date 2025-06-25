@@ -52,7 +52,9 @@ To create a platform where users can post queries and receive helpful product re
 ## 🛠️ How to Run Locally
 
 - **Step 1:** Clone the repository
+  git clone https://github.com/Ratul8863/Product-Recommendations-client.git
 - **Step 2:** Navigate to the project directory
+cd Product-Recommendations-client
 - **Step 3:** Install dependencies
 npm install
 - **Step 4:** Create a `.env` file and add your Firebase config:
@@ -63,7 +65,6 @@ VITE_projectId=your_project_id
 VITE_storageBucket=your_storage_bucket
 VITE_messagingSenderId=your_messagingSenderId
 VITE_appId=your_appId
-VITE_serverURL=http://localhost:5000  # Or your deployed server endpoint
 
 - **Step 5:** Start the development server
 npm run dev
