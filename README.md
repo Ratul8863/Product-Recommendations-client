@@ -51,7 +51,7 @@ To create a platform where users can post queries and receive helpful product re
 - **Step 3:** Install dependencies
 npm install
 - **Step 4:** Create a `.env` file and add your Firebase config:
-- # Example .env
+-  **Example .env**
 VITE_apiKey=your_api_key
 VITE_authDomain=your_auth_domain
 VITE_projectId=your_project_id
