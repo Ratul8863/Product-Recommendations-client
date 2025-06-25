@@ -16,6 +16,11 @@ To create a platform where users can post queries and receive helpful product re
 
 ---
 
+![Project Screenshot](https://i.ibb.co/G4kQn476/Screenshot-2025-06-25-142008.png)
+
+---
+
+
 ## 🚀 Key Features
 
 - 🔐 **Firebase Authentication** (Google + Email/Password)
