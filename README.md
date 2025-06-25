@@ -43,11 +43,8 @@ To create a platform where users can post queries and receive helpful product re
 - **React Icons** (`react-icons`)
 - **React Awesome Reveal** (`react-awesome-reveal`)
 
-### 📦 Installed NPM Packages:
 
-```bash
-npm install axios react-router-dom firebase react-toastify react-icons lottie-react react-awesome-reveal
-
+## 🛠️ How to Run Locally
 
 # Step 1: Clone the repository
 git clone https://github.com/Ratul8863/Product-Recommendations-client.git
@@ -70,4 +67,12 @@ VITE_serverURL=http://localhost:5000  # Or your deployed server endpoint
 
 # Step 5: Start the development server
 npm run dev
+
+### 📦 Installed NPM Packages:
+
+```bash
+npm install axios react-router-dom firebase react-toastify react-icons lottie-react react-awesome-reveal
+
+
+
 
