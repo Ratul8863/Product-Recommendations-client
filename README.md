@@ -54,11 +54,12 @@ To create a platform where users can post queries and receive helpful product re
 - **Step 1:** Clone the repository
   --git clone https://github.com/Ratul8863/Product-Recommendations-client.git
 - **Step 2:** Navigate to the project directory
-cd Product-Recommendations-client
+--cd Product-Recommendations-client
 - **Step 3:** Install dependencies
-npm install
+--npm install
 - **Step 4:** Create a `.env` file and add your Firebase config:
 -  **Example .env**
+  
 VITE_apiKey=your_api_key
 VITE_authDomain=your_auth_domain
 VITE_projectId=your_project_id
