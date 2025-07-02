@@ -89,7 +89,7 @@ const Queries = () => {
   };
 
   return (
-    <div className="min-h-screen pt-[110px] bg-[#0D1128] text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen  bg-[#0D1128] text-white py-12 px-4 sm:px-6 lg:px-8">
       <Helmet><title>RecoSys | Queries</title></Helmet>
 
       <div className="max-w-7xl mx-auto">

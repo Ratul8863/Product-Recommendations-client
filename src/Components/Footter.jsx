@@ -1,124 +1,68 @@
 import React from 'react';
-import { FaTwitter, FaYoutube, FaFacebookF, FaLinkedinIn } from 'react-icons/fa'; // Updated Facebook icon, added LinkedIn icon
-import { Link } from 'react-router-dom'; // Using Link for internal navigation
+import { FaTwitter, FaYoutube, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <>
-      {/* Top Section */}
-      <footer className="bg-gradient-to-br from-[#1c1f3b] to-[#0D1128] text-gray-200 px-8 py-12 grid grid-cols-2 md:grid-cols-3 gap-8 border-t border-gray-700 shadow-inner">
-        {/* Explore Section (Replaced Hobbies) */}
-        <div className='text-center md:text-left'>
+   <div className='bg-gradient-to-br  from-[#1c1f3b] to-[#0D1128] text-gray-200 border-t border-gray-700 shadow-inner'>
+     <footer className="max-w-[1400px] mx-auto ">
+      {/* Top Grid Section */}
+      <div className="px-8 py-12 w-full justify-items-center grid grid-cols-2 md:grid-cols-3 lg:flex justify-between gap-8">
+        {/* Explore */}
+        <div className="text-center md:text-left">
           <h6 className="text-xl font-bold mb-5 text-lime-400">Explore</h6>
           <ul className="space-y-3">
-            <li>
-              <Link to="/queries" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                All Queries
-              </Link>
-            </li>
-            <li>
-              <Link to="/add-query" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                Add New Query
-              </Link>
-            </li>
-            <li>
-              <Link to="/popular-queries" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                Popular Queries
-              </Link>
-            </li>
-            <li>
-              <Link to="/brands" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                Browse Brands
-              </Link>
-            </li>
+            <li><Link to="/queries" className="hover:text-lime-300 transition">All Queries</Link></li>
+            <li><Link to="/add-query" className="hover:text-lime-300 transition">Add New Query</Link></li>
+            <li><Link to="/my-queries" className="hover:text-lime-300 transition">My Queries</Link></li>
+            <li><Link to="/recommendations-for-me" className="hover:text-lime-300 transition">Recommendations</Link></li>
           </ul>
         </div>
 
-        {/* Company Section */}
-        <div className='text-center md:text-left'>
+        {/* Company */}
+        <div className="text-center md:text-left">
           <h6 className="text-xl font-bold mb-5 text-lime-400">Company</h6>
           <ul className="space-y-3">
-            <li>
-              <Link to="/about" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link to="/support" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                Support
-              </Link>
-            </li>
+            <li><Link to="/about" className="hover:text-lime-300 transition">About Us</Link></li>
+            <li><Link to="/contact" className="hover:text-lime-300 transition">Contact</Link></li>
+            <li><Link to="/blog" className="hover:text-lime-300 transition">Blog</Link></li>
           </ul>
         </div>
 
-        {/* Legal Section */}
-        <div className='text-center md:text-left'>
+        {/* Legal */}
+        <div className="text-center md:text-left">
           <h6 className="text-xl font-bold mb-5 text-lime-400">Legal</h6>
           <ul className="space-y-3">
-            <li>
-              <Link to="/terms" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                Terms of Use
-              </Link>
-            </li>
-            <li>
-              <Link to="/privacy" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link to="/cookie" className="hover:text-lime-300 transition-colors duration-200 cursor-pointer">
-                Cookie Policy
-              </Link>
-            </li>
+            <li><Link to="/terms" className="hover:text-lime-300 transition">Terms of Use</Link></li>
+            <li><Link to="/privacy" className="hover:text-lime-300 transition">Privacy Policy</Link></li>
           </ul>
         </div>
-      </footer>
+      </div>
 
       {/* Bottom Section */}
-      <footer className="flex flex-col md:flex-row items-center justify-between bg-gray-900 px-8 py-6 text-sm text-gray-400 border-t border-gray-700">
+      <div className="flex flex-col md:flex-row items-center justify-between px-8 py-6 text-sm text-gray-400 border-t border-gray-700">
         {/* Branding */}
         <Link onClick={() => window.scrollTo(0, 0)} to="/" className="flex items-center gap-3 mb-4 md:mb-0">
-          {/* Using a themed placeholder logo. Replace with your actual dark-theme compatible logo. */}
-          <img
-            src="https://i.ibb.co/39WLdycb/image.png" // Dark background, lime text
-            alt="RecoSys Logo"
-            className="w-10 h-10 rounded-full border border-lime-400"
-          />
+          <img src="https://i.ibb.co/39WLdycb/image.png" alt="RecoSys Logo" className="w-10 h-10 rounded-full border border-lime-400" />
           <div>
-            <p className="text-xl font-bold text-lime-400">RecoSys</p> {/* Changed to RecoSys and lime color */}
-            <p className="text-sm text-gray-500">Connecting insights since 2025</p> {/* More relevant tagline */}
+            <p className="text-xl font-bold text-lime-400">RecoSys</p>
+            <p className="text-sm text-gray-500">Connecting insights since 2025</p>
           </div>
         </Link>
 
         {/* Copyright */}
-        <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
+        <p className="text-center mb-4 md:mb-0">© {new Date().getFullYear()} RecoSys — All rights reserved</p>
 
-        {/* Social Links */}
-        <div className="flex gap-6 mt-4 md:mt-0">
-          {/* Twitter */}
-          <a href="https://twitter.com" className="text-gray-400 hover:text-blue-400 transition-colors duration-200" target="_blank" rel="noreferrer" aria-label="Twitter">
-            <FaTwitter size={28} />
-          </a>
-          {/* YouTube */}
-          <a href="https://www.youtube.com" className="text-gray-400 hover:text-red-500 transition-colors duration-200" target="_blank" rel="noreferrer" aria-label="YouTube">
-            <FaYoutube size={28} />
-          </a>
-          {/* Facebook */}
-          <a href="https://www.facebook.com" className="text-gray-400 hover:text-blue-600 transition-colors duration-200" target="_blank" rel="noreferrer" aria-label="Facebook">
-            <FaFacebookF size={28} /> {/* Using FaFacebookF for solid icon */}
-          </a>
-          {/* LinkedIn */}
-          <a href="https://www.linkedin.com" className="text-gray-400 hover:text-blue-700 transition-colors duration-200" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-            <FaLinkedinIn size={28} /> {/* Using FaLinkedinIn for solid icon */}
-          </a>
+        {/* Social Icons */}
+        <div className="flex gap-6">
+          <a href="https://twitter.com" className="text-gray-400 hover:text-blue-400 transition" target="_blank" rel="noreferrer" aria-label="Twitter"><FaTwitter size={24} /></a>
+          <a href="https://www.youtube.com" className="text-gray-400 hover:text-red-500 transition" target="_blank" rel="noreferrer" aria-label="YouTube"><FaYoutube size={24} /></a>
+          <a href="https://www.facebook.com" className="text-gray-400 hover:text-blue-600 transition" target="_blank" rel="noreferrer" aria-label="Facebook"><FaFacebookF size={24} /></a>
+          <a href="https://www.linkedin.com" className="text-gray-400 hover:text-blue-700 transition" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedinIn size={24} /></a>
         </div>
-      </footer>
-    </>
+      </div>
+    </footer>
+   </div>
   );
 }
 

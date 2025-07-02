@@ -11,7 +11,7 @@ const About = () => {
     const redirectPathForLoggedInUser = '/add-query'; // Or '/my-queries', '/profile', '/queries'
 
     return (
-        <div className="min-h-screen pt-[100px] bg-[#0D1128] text-white font-sans py-16 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen  bg-[#0D1128] text-white font-sans py-16 px-4 sm:px-6 lg:px-8">
              <Helmet>
                          <title>RecoSys | About</title>
                         </Helmet>

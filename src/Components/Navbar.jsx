@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full fixed top-0 left-0 right-0 z-50 shadow">
+    <div className="fixed top-0 left-0 right-0 z-50 shadow">
       {/* Top Info Bar */}
       <div className="hidden md:flex justify-between items-center px-6 py-2 text-sm bg-[#0D1128] text-lime-400 font-medium">
         <div className="flex items-center gap-4">
@@ -32,10 +32,9 @@ const Navbar = () => {
       </div>
 
       {/* Main Navbar */}
-      <div className="navbar bg-[#0D1128] text-white px-4 lg:px-10">
+      <div className="navbar max-w-[1400px] mx-auto bg-[#0D1128] text-white px-4 lg:px-10">
         {/* Logo & Mobile Hamburger */}
         <div className="navbar-start">
-          {/* Mobile Dropdown */}
           <div className="lg:hidden">
             <div className="dropdown">
               <button tabIndex={0} className="btn btn-ghost text-lime-400 hover:bg-lime-700">
@@ -57,7 +56,6 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                 ))}
-
                 {user && (
                   <>
                     <li><NavLink to="/recommendations-for-me">Recommendations for Me</NavLink></li>
@@ -67,7 +65,6 @@ const Navbar = () => {
                     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
                   </>
                 )}
-
                 <li>
                   {!user ? (
                     <Link to="/login" className="text-lime-400">Login</Link>
@@ -100,6 +97,7 @@ const Navbar = () => {
             </NavLink>
           ))}
 
+          {/* Hover Dropdown */}
           {user && (
             <div className="relative group">
               <button className="flex items-center px-4 py-2 text-white bg-gray-800 rounded-md focus:outline-none hover:bg-lime-500 hover:text-black transition">
@@ -111,7 +109,9 @@ const Navbar = () => {
                 </svg>
               </button>
 
-              <div className="absolute left-0 mt-2 w-48 bg-[#1c1f3b] rounded-md shadow-lg py-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+              <div className="absolute left-0 mt-2 w-48 bg-[#1c1f3b] rounded-md shadow-lg py-1 z-10 
+                opacity-0 invisible group-hover:opacity-100 group-hover:visible 
+                transition-all duration-300 ease-in-out">
                 <NavLink to="/recommendations-for-me" className="block px-4 py-2 text-sm hover:bg-lime-500 hover:text-black rounded-md mx-1 my-1">Recommendations for Me</NavLink>
                 <NavLink to="/my-queries" className="block px-4 py-2 text-sm hover:bg-lime-500 hover:text-black rounded-md mx-1 my-1">My Queries</NavLink>
                 <NavLink to="/my-recommendations" className="block px-4 py-2 text-sm hover:bg-lime-500 hover:text-black rounded-md mx-1 my-1">My Recommendations</NavLink>
@@ -122,9 +122,8 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Right Side: Theme Toggle & Auth */}
+        {/* Right Side: Theme & Auth */}
         <div className="navbar-end space-x-3">
-          {/* Theme Toggle */}
           <label className="swap swap-rotate">
             <input type="checkbox" className="theme-controller" />
             <svg className="swap-off h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -135,7 +134,6 @@ const Navbar = () => {
             </svg>
           </label>
 
-          {/* Auth Buttons */}
           {!user ? (
             <Link to="/login" className="btn btn-sm bg-lime-400 text-black font-semibold hover:bg-lime-500 transition">Login</Link>
           ) : (

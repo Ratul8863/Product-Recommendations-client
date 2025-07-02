@@ -9,9 +9,9 @@ function MainLayout() {
   const {loading} = useContext(AuthContext)
   return (
     <>
-    <div className=''>
+    <div className='max-w-[1400px] mx-auto'>
 
-<div className=''>
+<div className='pb-[100px] '>
   <Navbar></Navbar>
 </div>
 {

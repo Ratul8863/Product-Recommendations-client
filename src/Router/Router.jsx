@@ -17,6 +17,8 @@ import Addquary from "../Pages/Addquary";
 import Updatequary from "../Pages/Updatequary";
 import About from "../Pages/About";
 import Features from "../Pages/Features";
+import TermsOfUse from "../Pages/Terms/Terms";
+import PrivacyPolicy from "../Pages/Privacy/PrivacyPolicy";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +80,21 @@ export const router = createBrowserRouter([
         path: "/features",
         element: (
           <Features></Features>
+        ),
+      },
+
+      {
+        path: "/terms",
+        element: (
+
+          <TermsOfUse></TermsOfUse>
+        ),
+      },
+      {
+        path: "/privacy",
+        element: (
+
+          <PrivacyPolicy></PrivacyPolicy>
         ),
       },
     ],

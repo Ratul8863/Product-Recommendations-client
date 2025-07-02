@@ -104,7 +104,7 @@ const handleGridLayoutClick = (a) => {
   setGridLayout(a);
 };
     return (
-        <div className="min-h-screen bg-[#0D1128] flex flex-col lg:flex-row font-sans ">
+        <div className="min-h-screen max-w-full  bg-[#0D1128] flex flex-col lg:flex-row font-sans ">
             {/* Left Sidebar - Desktop */}
             <aside className="hidden lg:flex flex-col w-1/5 rounded-2xl ml-4 p-6 bg-[#1c1f3b] shadow-xl sticky top-0 h-screen overflow-y-auto transform transition-all duration-300 hover:scale-[1.01]">
                 <h2 className="text-3xl font-extrabold text-lime-400 mb-8 tracking-wide">🧠 RecoSys</h2>
