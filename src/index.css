@@ -17,3 +17,7 @@ body {
     border-radius: 20%;
      background-color: #a1e362;*/
 }
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, cupcake;
+}

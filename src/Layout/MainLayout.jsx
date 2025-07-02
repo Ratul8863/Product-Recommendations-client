@@ -11,7 +11,7 @@ function MainLayout() {
     <>
     <div className=''>
 
-<div className='mb-14  md:mb-24'>
+<div className=''>
   <Navbar></Navbar>
 </div>
 {

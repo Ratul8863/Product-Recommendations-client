@@ -18,8 +18,10 @@ const Home = () => {
      <Helmet>
              <title>RecoSys | Home</title>
             </Helmet>
-
-      <Banner />
+<div className='pt-[60px]'>
+  <Banner />
+</div>
+      
       <div className='py-12 space-y-20 px-4 md:px-8 lg:px-16'>
 
         <HomeSlider />

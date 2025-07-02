@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, Suspense } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthContext';
 import { FcLike, FcDislike } from "react-icons/fc";
@@ -8,283 +8,196 @@ import Looding1 from './Shared/Looding/Looding1';
 import { toast } from 'react-toastify';
 
 const Queries = () => {
-    const [queries, setQueries] = useState([]);
-    const [searchText, setSearchText] = useState('');
-    const [gridLayout, setGridLayout] = useState(3);
-    const [loading, setLoading] = useState(true); // Add a loading state
-    const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
+  const [queries, setQueries] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [gridLayout, setGridLayout] = useState(3);
+  const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        setLoading(true); // Set loading to true when fetch starts
-        fetch('https://product-reco-server.vercel.app/queries/all')
-            .then(res => res.json())
-            .then(data => {
-                const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                setQueries(sortedData);
-            })
-            .catch(error => console.error("Failed to fetch queries:", error))
-            .finally(() => setLoading(false)); // Set loading to false when fetch finishes (success or error)
-    }, []);
-
-    const handleLike = async (id) => {
-        if (!user) {
-            alert("Please log in to like.");
-            return;
-        }
-       try {
-  const res = await fetch(`https://product-reco-server.vercel.app/queries/like/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    credentials: 'include', // ✅ This sends the JWT cookie
-    body: JSON.stringify({ userEmail: user.email })
-  });
-
-  if (res.ok) {
-    setQueries(prevQueries =>
-      prevQueries.map(query => {
-        if (query._id === id) {
-          const updatedLikes = query.likes?.includes(user.email)
-            ? query.likes.filter(email => email !== user.email)
-            : [...(query.likes || []), user.email];
-          return { ...query, likes: updatedLikes };
-        }
-        return query;
+  useEffect(() => {
+    setLoading(true);
+    fetch('https://product-reco-server.vercel.app/queries/all')
+      .then(res => res.json())
+      .then(data => {
+        const sorted = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setQueries(sorted);
       })
-    );
+      .catch(err => console.error("Query fetch failed:", err))
+      .finally(() => setLoading(false));
+  }, []);
 
-    // Optional re-fetch for backend sync
-    const updated = await fetch('https://product-reco-server.vercel.app/queries', {
-      credentials: 'include'
-    }).then(res => res.json());
+  const handleLike = async (id) => {
+    if (!user) {
+      alert("Please login to like");
+      return;
+    }
 
-    setQueries(updated.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
-  } else {
-    alert("Failed to update like.");
-  }
-} catch (error) {
-  console.error("Error liking post:", error);
-}
+    try {
+      const res = await fetch(`https://product-reco-server.vercel.app/queries/like/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ userEmail: user.email })
+      });
 
-    };
+      if (res.ok) {
+        setQueries(prev =>
+          prev.map(q => q._id === id
+            ? {
+              ...q,
+              likes: q.likes?.includes(user.email)
+                ? q.likes.filter(e => e !== user.email)
+                : [...(q.likes || []), user.email]
+            }
+            : q
+          )
+        );
+      }
+    } catch (err) {
+      console.error("Like failed:", err);
+    }
+  };
 
-    const handleShare = (id) => {
-        const url = `${window.location.origin}/query/${id}`;
-        navigator.clipboard.writeText(url)
-            .then(() => alert("🔗 Link copied to clipboard!"))
-            .catch(err => console.error("Failed to copy link: ", err));
-    };
+  const handleShare = (id) => {
+    const url = `${window.location.origin}/query/${id}`;
+    navigator.clipboard.writeText(url)
+      .then(() => toast.success("🔗 Link copied!"))
+      .catch(err => console.error("Clipboard error:", err));
+  };
 
-    const handleRecommend = (id) => {
-        navigate(`/query/${id}`);
-    };
+  const handleRecommend = (id) => navigate(`/query/${id}`);
 
-    const filteredQueries = queries.filter((query) =>
-        query.productName.toLowerCase().includes(searchText.toLowerCase())
-    );
+  const filteredQueries = queries.filter(query =>
+    query.productName.toLowerCase().includes(searchText.toLowerCase())
+  );
 
-    const gridColsClass = {
-        1: 'grid-cols-1',
-        2: 'grid-cols-2 md:grid-cols-2',
-        3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'
-    }[gridLayout];
-const handleGridLayoutClick = (a) => {
-  if (window.innerWidth < 640) {
-    toast.error("Use a larger device to enable grid layout");
-    return;
-  }
-  setGridLayout(a);
-};
-const handleGridLayoutClicks = (a) => {
-  if (window.innerWidth < 1172) {
-    toast.error("Use a larger device to enable grid layout");
-    return;
-  }
-  setGridLayout(a);
-};
-    return (
-        <div className="min-h-screen bg-[#0D1128] text-white font-sans py-12 px-4 sm:px-6 lg:px-8">
-            <Helmet>
-                <title>RecoSys | Queries</title>
-            </Helmet>
-            <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-16">
-                    <h2 className="text-5xl font-extrabold text-lime-400 leading-tight mb-4 drop-shadow-md animate-fade-in-down">
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-lime-600">All Community Queries</span>
-                    </h2>
-                    <p className="text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in-up">
-                        Explore every product query submitted by our vibrant community, sorted by the latest additions.
-                    </p>
-                </div>
+  const gridColsClass = {
+    1: 'grid-cols-1',
+    2: 'grid-cols-2 md:grid-cols-2',
+    3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+    4: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'
+  }[gridLayout];
 
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 p-6 bg-[#1c1f3b] rounded-3xl shadow-2xl border border-gray-700 animate-slide-in-up">
-                    <div className="relative w-full md:w-1/2 lg:w-2/5">
-                        <input
-                            type="text"
-                            placeholder="Search by Product Name..."
-                            className="w-full p-4 pl-12 rounded-full bg-gray-800 border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-3 focus:ring-lime-500 focus:border-transparent shadow-inner transition-all duration-300 text-lg"
-                            value={searchText}
-                            onChange={(e) => setSearchText(e.target.value)}
-                        />
-                        <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
-                    </div>
+  const handleGridClick = (cols) => {
+    const minWidth = cols === 4 ? 1280 : cols === 3 ? 1172 : 640;
+    if (window.innerWidth < minWidth) {
+      toast.error(`Use a larger screen to enable ${cols}-column layout`);
+      return;
+    }
+    setGridLayout(cols);
+  };
 
-                    <div className="flex gap-3 bg-gray-800 p-2 rounded-full shadow-inner border border-gray-700">
-                        <button
-                            onClick={() => setGridLayout(1)}
-                            className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center text-xl
-                                ${gridLayout === 1 ? 'bg-gradient-to-br from-lime-400 to-lime-600 text-black shadow-lg transform scale-105' : 'text-gray-400 hover:bg-gray-700 hover:text-lime-300'}
-                            `}
-                            title="1 Column Layout"
-                        >
-                            <FaList size={22} />
-                        </button>
-                        <button
-                            onClick={() => handleGridLayoutClick(2)}
-                            className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center text-xl
-                                ${gridLayout === 2 ? 'bg-gradient-to-br from-lime-400 to-lime-600 text-black shadow-lg transform scale-105' : 'text-gray-400 hover:bg-gray-700 hover:text-lime-300'}
-                            `}
-                            title="2 Column Layout"
-                        >
-                            <FaTh size={22} />
-                        </button>
-                        <button
-                            onClick={() => handleGridLayoutClicks(3)}
-                            className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center text-xl
-                                ${gridLayout === 3 ? 'bg-gradient-to-br from-lime-400 to-lime-600 text-black shadow-lg transform scale-105' : 'text-gray-400 hover:bg-gray-700 hover:text-lime-300'}
-                            `}
-                            title="3 Column Layout"
-                        >
-                            <FaThLarge size={22} />
-                        </button>
-                    </div>
-                </div>
+  return (
+    <div className="min-h-screen pt-[110px] bg-[#0D1128] text-white py-12 px-4 sm:px-6 lg:px-8">
+      <Helmet><title>RecoSys | Queries</title></Helmet>
 
-                {/* Conditional Rendering based on loading state */}
-                {loading ? (
-                    <Looding1 />
-                ) : filteredQueries.length === 0 ? (
-                    <div className="text-center py-20 bg-[#1c1f3b] rounded-3xl shadow-xl border border-gray-700 flex flex-col items-center justify-center space-y-6 animate-fade-in">
-                        <FaInfoCircle className="text-lime-400 text-6xl opacity-70" />
-                        <p className="text-3xl font-bold text-gray-200">
-                            No Queries Found!
-                        </p>
-                        <p className="text-lg text-gray-400 max-w-md">
-                            It seems your search didn't match any existing product queries.
-                            Try adjusting your search terms or explore other categories.
-                        </p>
-                        <Link
-                            to="/add-query"
-                            className="mt-6 bg-gradient-to-r from-lime-500 to-lime-300 text-black font-extrabold text-lg
-                            px-10 py-4 rounded-full shadow-2xl hover:shadow-lime-400/70
-                            transform hover:scale-105 transition-all duration-300 ease-in-out
-                            tracking-wide uppercase relative overflow-hidden group"
-                        >
-                            <span className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                                <FaRegLightbulb className="text-xl" /> Share Your Query
-                            </span>
-                        </Link>
-                    </div>
-                ) : (
-                    <div className={`grid ${gridColsClass} gap-8 transition-all duration-500 ease-in-out`}>
-                        {filteredQueries.map((query) => {
-                            const isLiked = query.likes?.includes(user?.email);
-                            return (
-                                <div
-                                    key={query._id}
-                                    className="bg-[#1c1f3b] rounded-3xl shadow-xl border border-gray-700 p-7 flex flex-col transform transition-transform duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-lime-500/30 group relative overflow-hidden"
-                                >
-                                    <div className="flex justify-between items-center mb-4">
-                                        <div className="flex items-center gap-3">
-                                            <img
-                                                src={query.userPhoto || '/avatar.png'}
-                                                alt={query.userName}
-                                                className="w-12 h-12 rounded-full border-2 border-lime-400 object-cover shadow-md"
-                                            />
-                                            <div>
-                                                <p className="font-bold text-lime-300 text-lg">{query.userName}</p>
-                                                <p className="text-xs text-gray-500">{new Date(query.createdAt).toLocaleString()}</p>
-                                            </div>
-                                        </div>
-                                        <span className="text-sm text-gray-500 bg-gray-800 px-3 py-1 rounded-full border border-gray-700">🌐 Public</span>
-                                    </div>
-
-                                    <h3 className="text-2xl font-extrabold text-white leading-snug mb-3">
-                                        {query.queryTitle}
-                                    </h3>
-
-                                    {query.productImage && (
-                                        <div className="rounded-2xl w-full h-56 overflow-hidden border border-gray-700 mb-5 flex justify-center items-center bg-gray-900 shadow-md">
-                                            <img
-                                                src={query.productImage}
-                                                alt={query.productName}
-                                                className="w-full h-full object-contain p-3 transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                            />
-                                        </div>
-                                    )}
-
-                                    <div className="space-y-2 flex-grow">
-                                        <p className="text-base text-gray-300 flex items-center gap-2">
-                                            <span className="text-lime-400">🛍️</span> <span className="font-semibold">Product:</span>
-                                            <strong className="text-lime-300 ml-1">{query.productName}</strong> ({query.productBrand})
-                                        </p>
-                                        <p className="text-sm text-red-400 leading-snug">
-                                            ❌ <span className="font-semibold">Reason:</span> {query.boycottingReason?.slice(0, 100)}{query.boycottingReason.length > 100 ? '...' : ''}
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center justify-between text-sm my-2">
-                                        {query.likes?.length > 0 && (
-                                            <div className='flex items-center gap-1 text-pink-300'>
-                                                <FcLike size={20} /> {query.likes.length}
-                                            </div>
-                                        )}
-                                        <p className="text-cyan-300 flex items-center gap-1">
-                                            💡 <span className="font-semibold">Recommendations:</span> {query.recommendationCount || 0}
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-around border-t border-gray-700 pt-5 text-gray-400 mt-auto">
-                                        <button
-                                            onClick={(e) => { e.stopPropagation(); handleLike(query._id); }}
-                                            className="hover:text-lime-300 flex items-center gap-2 cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 rounded-md p-2"
-                                            aria-label={isLiked ? "Unlike" : "Like"}
-                                        >
-                                            {isLiked ? <FcDislike size={22} /> : <FcLike size={22} />}
-                                            <span className="hidden md:inline">
-                                                {isLiked ? 'Unlike' : 'Like'}
-                                            </span>
-                                        </button>
-                                        <button
-                                            onClick={(e) => { e.stopPropagation(); handleRecommend(query._id); }}
-                                            className="hover:text-lime-300 flex items-center gap-2 cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 rounded-md p-2"
-                                            aria-label="Recommend"
-                                        >
-                                            <FaCommentAlt size={20} />
-                                            <span className="hidden md:inline">
-                                                Recommend
-                                            </span>
-                                        </button>
-                                        <button
-                                            onClick={(e) => { e.stopPropagation(); handleShare(query._id); }}
-                                            className="hover:text-lime-300 flex items-center gap-2 cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 rounded-md p-2"
-                                            aria-label="Share"
-                                        >
-                                            <FaShareAlt size={20} />
-                                            <span className="hidden md:inline">
-                                                Share
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                )}
-            </div>
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-extrabold text-lime-400 mb-4 drop-shadow-md">All Community Queries</h2>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">Explore product-related concerns raised by our community</p>
         </div>
-    );
+
+        {/* Filters */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12 p-6 bg-[#1c1f3b] rounded-3xl shadow-2xl border border-gray-700">
+          <div className="relative w-full md:w-1/2 lg:w-2/5">
+            <input
+              type="text"
+              placeholder="Search by Product Name..."
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              className="w-full p-4 pl-12 rounded-full bg-gray-800 border border-gray-600 text-white placeholder-gray-500 focus:ring-3 focus:ring-lime-500 text-lg"
+            />
+            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
+          </div>
+
+          {/* Grid Layout Switcher */}
+          <div className="flex gap-3 bg-gray-800 p-2 rounded-full shadow-inner border border-gray-700">
+            {[1, 2, 3, 4].map((cols, idx) => {
+              const icons = [<FaList />, <FaTh />, <FaThLarge />, <span className="text-xl">4️⃣</span>];
+              return (
+                <button
+                  key={cols}
+                  onClick={() => handleGridClick(cols)}
+                  title={`${cols} Column Layout`}
+                  className={`p-3 rounded-full transition-all flex items-center justify-center text-xl ${
+                    gridLayout === cols
+                      ? 'bg-gradient-to-br from-lime-400 to-lime-600 text-black shadow-lg scale-105'
+                      : 'text-gray-400 hover:text-lime-300 hover:bg-gray-700'
+                  }`}
+                >
+                  {icons[idx]}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Results */}
+        {loading ? <Looding1 /> : filteredQueries.length === 0 ? (
+          <div className="text-center py-20 bg-[#1c1f3b] rounded-3xl border border-gray-700 space-y-6">
+            <FaInfoCircle className="text-lime-400 text-6xl opacity-70" />
+            <p className="text-3xl font-bold text-gray-200">No Queries Found!</p>
+            <p className="text-lg text-gray-400 max-w-md mx-auto">
+              Try changing your search or submit your own product-related concern.
+            </p>
+            <Link to="/add-query">
+              <button className="bg-gradient-to-r from-lime-500 to-lime-300 text-black font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-all duration-300">
+                <FaRegLightbulb className="inline mr-2" /> Share Your Query
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div className={`grid ${gridColsClass} gap-8`}>
+            {filteredQueries.map(query => {
+              const isLiked = query.likes?.includes(user?.email);
+              return (
+                <div key={query._id} className="bg-[#1c1f3b] rounded-3xl p-7 shadow-xl border border-gray-700 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-lime-500/30 transition duration-300 group">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <img src={query.userPhoto || '/avatar.png'} className="w-12 h-12 rounded-full border-2 border-lime-400" alt="" />
+                      <div>
+                        <p className="font-bold text-lime-300">{query.userName}</p>
+                        <p className="text-xs text-gray-500">{new Date(query.createdAt).toLocaleString()}</p>
+                      </div>
+                    </div>
+                    <span className="text-sm    rounded-full  ">🌐 </span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-3">{query.queryTitle}</h3>
+                  {query.productImage && (
+                    <div className="w-full h-56 bg-gray-900 border border-gray-700 rounded-xl overflow-hidden mb-4 flex items-center justify-center">
+                      <img src={query.productImage} className="object-contain w-full h-full  group-hover:scale-110 transition" alt="" />
+                    </div>
+                  )}
+                  <p className="text-gray-300"><span className="text-lime-400">🛍️ Product:</span> <b>{query.productName}</b> </p>
+                  <p className="text-sm text-red-400 mt-2">❌ Reason: {query.boycottingReason.slice(0, 10)} <span onClick={() => handleRecommend(query._id)}>{query.boycottingReason.length > 100 ? '...' : ''}</span>  </p>
+
+                  <div className="flex justify-between text-sm mt-4 text-gray-300">
+                    {query.likes?.length > 0 && (
+                      <span className="flex items-center gap-1 text-pink-300"><FcLike /> {query.likes.length}</span>
+                    )}
+                    <span className="text-cyan-300">💡 Recommendations: {query.recommendationCount || 0}</span>
+                  </div>
+
+                  <div className="flex justify-around pt-5 border-t border-gray-700 mt-4 text-gray-400">
+                    <button onClick={() => handleLike(query._id)} className="hover:text-lime-300 flex gap-2 items-center cursor-pointer">
+                      {isLiked ? <FcDislike /> : <FcLike />} 
+                    </button>
+                    <button onClick={() => handleRecommend(query._id)} className="hover:text-lime-300 flex gap-2 items-center cursor-pointer">
+                      <FaCommentAlt /> 
+                    </button>
+                    <button onClick={() => handleShare(query._id)} className="hover:text-lime-300 flex gap-2 items-center cursor-pointer">
+                      <FaShareAlt /> 
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Queries;
