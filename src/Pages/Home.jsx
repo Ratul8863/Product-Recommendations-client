@@ -34,7 +34,7 @@ const Home = () => {
           <h2 className="text-3xl text-center text-lime-400 font-bold mb-8">📦 Product Categories</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center">
             {["Electronics", "Fashion", "Health", "Books", "Food", "Software", "Home", "Toys"].map(cat => (
-              <div key={cat} className="p-4 bg-gray-800 hover:bg-lime-600 hover:text-black rounded-lg transition font-semibold">
+              <div key={cat} className="p-4 bg-cyan-900 hover:bg-lime-600 hover:text-black rounded-lg transition font-semibold">
                 {cat}
               </div>
             ))}
@@ -49,7 +49,7 @@ const Home = () => {
         </section>
 
         {/* Community Trust */}
-        <section className="bg-purple-700 text-white rounded-3xl p-10 text-center shadow-2xl max-w-4xl mx-auto">
+        <section className="bg-purple-700 text-white rounded-3xl p-10 text-center shadow-2xl ">
           <h2 className="text-3xl font-bold mb-4">🔐 Trusted by the Community</h2>
           <p className="text-lg mb-6">Thousands rely on RecoSys for ethical recommendations.</p>
           <div className="flex justify-center gap-6 flex-wrap">
@@ -74,7 +74,7 @@ const Home = () => {
         </section>
 
         {/* Newsletter Section */}
-        <section className="bg-gradient-to-r from-indigo-600 to-lime-500 p-10 rounded-3xl shadow-2xl text-white text-center max-w-4xl mx-auto">
+        <section className="bg-gradient-to-r from-indigo-600 to-lime-500 p-10 rounded-3xl shadow-2xl text-white text-center ">
           <h2 className="text-3xl font-bold mb-4">📬 Subscribe to Our Newsletter</h2>
           <p className="text-lg mb-6">Stay updated with ethical product trends and deals.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -88,7 +88,7 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-pink-600 to-purple-700 rounded-3xl p-10 text-center max-w-4xl mx-auto text-white">
+        <section className="bg-gradient-to-r from-pink-600 to-purple-700 rounded-3xl p-10 text-center  text-white">
           <h2 className="text-4xl font-bold mb-4">Ready to Share Your Voice?</h2>
           <p className="text-lg mb-6">Post your queries or recommend ethical alternatives today.</p>
           <Link to="/add-query">
