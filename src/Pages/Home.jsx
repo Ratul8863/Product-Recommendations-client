@@ -30,11 +30,11 @@ const Home = () => {
         </section>
 
         {/* Product Categories */}
-        <section className="bg-[#1c1f3b] rounded-3xl shadow-xl border border-gray-700 p-10">
+        <section className="bg-[#1c1f3b] rounded-3xl text-white shadow-xl border border-gray-700 p-10">
           <h2 className="text-3xl text-center text-lime-400 font-bold mb-8">📦 Product Categories</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center">
             {["Electronics", "Fashion", "Health", "Books", "Food", "Software", "Home", "Toys"].map(cat => (
-              <div key={cat} className="p-4 bg-cyan-900 hover:bg-lime-600 hover:text-black rounded-lg transition font-semibold">
+              <div key={cat} className="p-4 bg-gray-800 hover:bg-lime-600 hover:text-black rounded-lg transition font-semibold">
                 {cat}
               </div>
             ))}
