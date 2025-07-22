@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-   <div className='bg-gradient-to-br  from-[#1c1f3b] to-[#0D1128] text-gray-200 border-t border-gray-700 shadow-inner'>
+   <div className='bg-gradient-to-br  from-[#1c1f3b] to-[#0D1128] max-w-[1400px] mx-auto text-gray-200 border-t border-gray-700 shadow-inner'>
      <footer className="max-w-[1400px] mx-auto ">
       {/* Top Grid Section */}
       <div className="px-8 py-12 w-full justify-items-center grid grid-cols-2 md:grid-cols-3 lg:flex justify-between gap-8">
