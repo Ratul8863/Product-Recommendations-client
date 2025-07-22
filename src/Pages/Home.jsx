@@ -18,10 +18,7 @@ const Home = () => {
       <div className="space-y-20 py-12 px-4 md:px-8 lg:px-16">
         
         {/* Highlighted Products (Slider) */}
-        <section>
-          <h2 className="text-3xl font-bold text-lime-400 text-center mb-8">🌟 Highlighted Products</h2>
-          <HomeSlider />
-        </section>
+       
 
         {/* Recent Queries */}
         <section>
