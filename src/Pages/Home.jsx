@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   return (
-    <div className="min-h-screen pt-[64px] ">
+    <div className="min-h-screen  ">
       <Helmet>
         <title>RecoSys | Home</title>
       </Helmet>

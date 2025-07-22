@@ -45,7 +45,7 @@ const Navbar = () => {
                 </svg>
               </button>
               <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[100] p-4 shadow bg-[#1c1f3b] rounded-lg w-52 text-white space-y-2">
-                {['/', '/about', '/features', '/queries', '/blog'].map((path, i) => (
+                {['/', '/about', '/features', '/queries'].map((path, i) => (
                   <li key={i}>
                     <NavLink
                       to={path}
@@ -62,7 +62,7 @@ const Navbar = () => {
                     <li><NavLink to="/my-queries">My Queries</NavLink></li>
                     <li><NavLink to="/my-recommendations">My Recommendations</NavLink></li>
                     <li><NavLink to="/add-query">Add Query</NavLink></li>
-                    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                    {/* <li><NavLink to="/dashboard">Dashboard</NavLink></li> */}
                   </>
                 )}
                 <li>
@@ -85,7 +85,7 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="navbar-center hidden lg:flex space-x-6 font-medium">
-          {['/', '/about', '/features', '/queries', '/blog'].map((path, i) => (
+          {['/', '/about', '/features', '/queries'].map((path, i) => (
             <NavLink
               key={i}
               to={path}
@@ -124,7 +124,7 @@ const Navbar = () => {
 
         {/* Right Side: Theme & Auth */}
         <div className="navbar-end space-x-3">
-          <label className="swap swap-rotate">
+          {/* <label className="swap swap-rotate">
             <input type="checkbox" className="theme-controller" />
             <svg className="swap-off h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M5 12a7 7 0 1014 0 7 7 0 10-14 0z" />
@@ -132,7 +132,7 @@ const Navbar = () => {
             <svg className="swap-on h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
             </svg>
-          </label>
+          </label> */}
 
           {!user ? (
             <Link to="/login" className="btn btn-sm bg-lime-400 text-black font-semibold hover:bg-lime-500 transition">Login</Link>

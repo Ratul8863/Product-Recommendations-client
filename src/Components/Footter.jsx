@@ -25,7 +25,7 @@ function Footer() {
           <ul className="space-y-3">
             <li><Link to="/about" className="hover:text-lime-300 transition">About Us</Link></li>
             <li><Link to="/contact" className="hover:text-lime-300 transition">Contact</Link></li>
-            <li><Link to="/blog" className="hover:text-lime-300 transition">Blog</Link></li>
+            {/* <li><Link to="/blog" className="hover:text-lime-300 transition">Blog</Link></li> */}
           </ul>
         </div>
 

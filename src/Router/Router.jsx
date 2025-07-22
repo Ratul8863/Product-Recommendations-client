@@ -19,6 +19,7 @@ import About from "../Pages/About";
 import Features from "../Pages/Features";
 import TermsOfUse from "../Pages/Terms/Terms";
 import PrivacyPolicy from "../Pages/Privacy/PrivacyPolicy";
+import BlogSection from "../Pages/Privacy/Blogs";
 
 export const router = createBrowserRouter([
   {
@@ -95,6 +96,13 @@ export const router = createBrowserRouter([
         element: (
 
           <PrivacyPolicy></PrivacyPolicy>
+        ),
+      },
+       {
+        path: "/blog",
+        element: (
+
+          <BlogSection></BlogSection>
         ),
       },
     ],

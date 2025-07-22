@@ -133,35 +133,54 @@ const MyQueries = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6">
-          {queries
-            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            .map(query => (
-              <div key={query._id} className="border border-gray-700 rounded-2xl p-5 bg-[#1c1f3b] shadow-lg">
-                <div className="flex justify-between items-start">
-                  <div className="flex items-center gap-3">
-                    <img src={query.userPhoto} alt={query.userName} className="w-10 h-10 rounded-full border-2 border-lime-400" />
-                    <div>
-                      <p className="font-semibold text-white">{query.userName}</p>
-                      <p className="text-sm text-gray-400 mt-1">
-                        <strong>Submitted:</strong> {new Date(query.createdAt).toLocaleString()}
-                      </p>
-                    </div>
-                  </div>
-                  <div className='  '>
-                    <div className="flex gap-x-2">
-                    <Link to={`/query/${query._id}`} className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm font-medium">View</Link>
-                    <button onClick={() => openModal(query)} className="bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-1 rounded text-sm font-medium">Update</button>
-                    <button onClick={() => handleDelete(query._id)} className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm font-medium">Delete</button>
-                  </div>
-                  <h2 className="text-cyan-300 mt-1 "> <span className="font-semibold">Recommendations:</span> {query.recommendationCount || 0}</h2>
-                  </div>
-                </div>
-                <h4 className="text-xl font-bold mt-3 text-lime-300">{query.queryTitle}</h4>
-                <p className="text-gray-300"><span className="font-medium">Product:</span> {query.productName}</p>
-                <img src={query.productImage} alt="Product" className="w-28 rounded mt-2 border border-gray-700" />
-                <p className="mt-2 text-gray-400">{query.boycottingReason}</p>
+         <div className="overflow-x-auto mt-6">
+  <table className="min-w-full border border-gray-700 rounded-xl">
+    <thead className="bg-[#1c1f3b] text-lime-300">
+      <tr>
+        <th className="px-4 py-3 border-b border-gray-700 text-left">Product</th>
+        <th className="px-4 py-3 border-b border-gray-700 text-left">Title</th>
+        <th className="px-4 py-3 border-b border-gray-700 text-left">Submitted By</th>
+        <th className="px-4 py-3 border-b border-gray-700 text-left">Date</th>
+        <th className="px-4 py-3 border-b border-gray-700 text-left">Recommendations</th>
+        <th className="px-4 py-3 border-b border-gray-700 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody className="bg-[#0D1128] text-white">
+      {queries
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .map(query => (
+          <tr key={query._id} className="hover:bg-[#1a1e37] transition">
+            <td className="px-4 py-3 flex items-center gap-3">
+              <img src={query.productImage} alt="Product" className="w-12 h-12 rounded border border-gray-600" />
+              <div>
+                <p className="font-semibold">{query.productName}</p>
+                <p className="text-sm text-gray-400">{query.productBrand}</p>
               </div>
-            ))}
+            </td>
+            <td className="px-4 py-3 text-lime-300 font-bold">{query.queryTitle}</td>
+            <td className="px-4 py-3">
+              <div className="flex items-center gap-2">
+                <img src={query.userPhoto} alt="User" className="w-8 h-8 rounded-full border-2 border-lime-400" />
+                <span>{query.userName}</span>
+              </div>
+            </td>
+            <td className="px-4 py-3 text-sm text-gray-400">
+              {new Date(query.createdAt).toLocaleString()}
+            </td>
+            <td className="px-4 py-3 text-cyan-300 font-medium text-center">
+              {query.recommendationCount || 0}
+            </td>
+            <td className="px-4 py-3 flex gap-2 flex-wrap">
+              <Link to={`/query/${query._id}`} className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm font-medium">View</Link>
+              <button onClick={() => openModal(query)} className="bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-1 rounded text-sm font-medium">Update</button>
+              <button onClick={() => handleDelete(query._id)} className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm font-medium">Delete</button>
+            </td>
+          </tr>
+        ))}
+    </tbody>
+  </table>
+</div>
+
         </div>
       )}
 
