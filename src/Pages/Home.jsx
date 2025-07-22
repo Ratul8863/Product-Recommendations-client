@@ -74,7 +74,18 @@ const Home = () => {
         </section>
 
         {/* Newsletter Section */}
-       
+        <section className="bg-gradient-to-r from-indigo-600 to-lime-500 p-10 rounded-3xl shadow-2xl text-white text-center ">
+          <h2 className="text-3xl font-bold mb-4">📬 Subscribe to Our Newsletter</h2>
+          <p className="text-lg mb-6">Stay updated with ethical product trends and deals.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full sm:w-2/3 px-5 py-3 rounded-full text-black"
+            />
+            <button className="bg-black text-lime-400 px-6 py-3 rounded-full font-bold hover:bg-white hover:text-black transition">Subscribe</button>
+          </div>
+        </section>
 
         {/* CTA Section */}
         <section className="bg-gradient-to-r from-pink-600 to-purple-700 rounded-3xl p-10 text-center  text-white">
