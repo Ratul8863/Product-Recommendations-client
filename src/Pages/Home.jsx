@@ -42,7 +42,11 @@ const Home = () => {
         </section>
 
         {/* Promotional Offers */}
-       
+        <section className="bg-gradient-to-r from-pink-500 to-yellow-500 text-black p-10 rounded-3xl text-center shadow-2xl">
+          <h2 className="text-3xl font-bold mb-4">🔥 Promotional Offers</h2>
+          <p className="mb-4">Get up to <span className="font-extrabold text-4xl">50% OFF</span> on featured sustainable products!</p>
+          <button className="bg-black text-yellow-300 px-6 py-3 rounded-full font-bold hover:scale-105 transition">Shop Now</button>
+        </section>
 
         {/* Community Trust */}
         <section className="bg-purple-700 text-white rounded-3xl p-10 text-center shadow-2xl ">
