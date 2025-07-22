@@ -13,7 +13,7 @@ const Home = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <Banner />
+     
 
       <div className="space-y-20 py-12 px-4 md:px-8 lg:px-16">
         
