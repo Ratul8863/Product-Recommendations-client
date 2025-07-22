@@ -16,9 +16,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 shadow">
+    <div className=" fixed top-0 left-0 right-0 z-50 shadow ">
       {/* Top Info Bar */}
-      <div className="hidden md:flex justify-between items-center px-6 py-2 text-sm bg-[#0D1128] text-lime-400 font-medium">
+      <div className='max-w-[1400px] mx-auto bg-gradient-to-br   from-[#1c1f3b] to-[#0D1128] '>
+        <div className="hidden md:flex justify-between  items-center max-w-[1400px] mx-auto px-6 py-2 text-sm  text-lime-400 font-medium">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1"><FaPhoneAlt /> + (1800) 456 7890</span>
           <span className="flex items-center gap-1"><FaEnvelope /> info@query.com</span>
@@ -32,7 +33,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Navbar */}
-      <div className="navbar max-w-[1400px] mx-auto bg-[#0D1128] text-white px-4 lg:px-10">
+      <div className="navbar  max-w-[1400px] mx-auto  text-white px-4 lg:px-10">
         {/* Logo & Mobile Hamburger */}
         <div className="navbar-start">
           <div className="lg:hidden">
@@ -143,6 +144,7 @@ const Navbar = () => {
             </>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
