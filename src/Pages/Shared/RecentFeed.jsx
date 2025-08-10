@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthContext';
 import ExtraSection1 from '../../Components/ExtraSection1';
 import ExtraSection2 from '../../Components/ExtraSection2';
+import { AiFillHeart } from "react-icons/ai";
 import { FcLike, FcDislike } from "react-icons/fc";
 import { FaCommentAlt, FaTh, FaThLarge, FaList } from 'react-icons/fa'; // Added icons for layouts
 import { MdShare, MdFilterList, MdOutlineClose } from 'react-icons/md'; // Added filter and close icons
@@ -104,10 +105,10 @@ const handleGridLayoutClick = (a) => {
   setGridLayout(a);
 };
     return (
-        <div className="min-h-screen max-w-full  bg-[#0D1128] flex flex-col lg:flex-row font-sans ">
+        <div className="min-h-screen max-w-full  bg-white dark:bg-[#0D1128] text-gray-900 dark:text-white flex flex-col lg:flex-row font-sans ">
             {/* Left Sidebar - Desktop */}
-            <aside className="hidden lg:flex flex-col w-1/5 rounded-2xl ml-4 p-6 bg-[#1c1f3b] shadow-xl sticky top-0 h-screen overflow-y-auto transform transition-all duration-300 hover:scale-[1.01]">
-                <h2 className="text-3xl font-extrabold text-lime-400 mb-8 tracking-wide">🧠 RecoSys</h2>
+            <aside className="hidden bg-gray-100 dark:bg-[#0D1128] text-gray-900 dark:text-white lg:flex flex-col w-1/5 rounded-2xl ml-4 p-4  shadow-xl sticky top-0 h-screen overflow-y-auto transform transition-all duration-300 hover:scale-[1.01]">
+                <h2 className="text-3xl font-extrabold dark:text-lime-400 mb-8 tracking-wide">🧠 RecoSys</h2>
                 <ExtraSection1 />
             </aside>
 
@@ -117,7 +118,7 @@ const handleGridLayoutClick = (a) => {
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
                     <button
                         onClick={() => setShowFilters(!showFilters)}
-                        className="bg-lime-600 text-white font-bold py-2 px-6 rounded-xl hover:bg-lime-500 transition-all duration-300 flex items-center gap-2 shadow-lg w-full sm:w-auto justify-center"
+                        className="dark:bg-lime-600 bg-[#1c1f3b] text-white font-bold py-2 px-6 rounded-xl hover:bg-lime-500 transition-all duration-300 flex items-center gap-2 shadow-lg w-full sm:w-auto justify-center"
                     >
                         {showFilters ? <MdOutlineClose size={20} /> : <MdFilterList size={20} />}
                         {showFilters ? 'Hide Filters' : 'Show Filters'}
@@ -146,12 +147,12 @@ const handleGridLayoutClick = (a) => {
 
                 {/* Dynamic Filter Section */}
                 {showFilters && (
-                    <div className="bg-[#1c1f3b] p-6 rounded-2xl shadow-xl mb-8 border border-gray-700 animate-fadeIn">
+                    <div className="bg-white dark:bg-[#0D1128] text-gray-900 dark:text-white p-6 rounded-2xl shadow-xl mb-8 border border-gray-700 animate-fadeIn">
                         <h3 className="text-2xl font-bold text-lime-400 mb-5 text-center">Customize Your View</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {/* Search Filter */}
                             <div>
-                                <label htmlFor="search" className="block text-gray-300 text-sm font-semibold mb-2">Search Product Name</label>
+                                <label htmlFor="search" className="block  text-sm font-semibold mb-2">Search Product Name</label>
                                 <input
                                     type="text"
                                     id="search"
@@ -164,7 +165,7 @@ const handleGridLayoutClick = (a) => {
 
                             {/* Brand Filter */}
                             <div>
-                                <label htmlFor="brand" className="block text-gray-300 text-sm font-semibold mb-2">Filter by Brand</label>
+                                <label htmlFor="brand" className="block  text-sm font-semibold mb-2">Filter by Brand</label>
                                 <select
                                     id="brand"
                                     className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-lime-400 appearance-none pr-8"
@@ -180,7 +181,7 @@ const handleGridLayoutClick = (a) => {
 
                             {/* Recommendations Filter */}
                             <div>
-                                <label htmlFor="recommendations" className="block text-gray-300 text-sm font-semibold mb-2">Min. Recommendations</label>
+                                <label htmlFor="recommendations" className="block  text-sm font-semibold mb-2">Min. Recommendations</label>
                                 <input
                                     type="number"
                                     id="recommendations"
@@ -206,7 +207,7 @@ const handleGridLayoutClick = (a) => {
                             return (
                                 <div
                                     key={query._id}
-                                    className="bg-[#1c1f3b] rounded-2xl shadow-lg hover:shadow-lime-400/50 transition-all duration-300 p-6 border border-gray-700 transform hover:-translate-y-1 hover:scale-[1.01] flex flex-col"
+                                    className="bg-white dark:bg-[#0D1128] text-gray-900 dark:text-white rounded-2xl shadow-lg hover:shadow-lime-400/50 transition-all duration-300 p-6 border border-gray-700 transform hover:-translate-y-1 hover:scale-[1.01] flex flex-col"
                                 >
                                     {/* Header */}
                                     <div className="flex justify-between items-center mb-4">
@@ -217,18 +218,28 @@ const handleGridLayoutClick = (a) => {
                                                 className="w-12 h-12 rounded-full border-2 border-lime-400 object-cover"
                                             />
                                             <div>
-                                                <p className="font-bold text-lime-300 text-lg">{query.userName}</p>
+                                                <p className="font-bold dark:text-lime-300 text-lg">{query.userName}</p>
                                                 <p className="text-xs text-gray-500">{new Date(query.createdAt).toLocaleString()}</p>
                                             </div>
                                         </div>
-                                        <span className="text-sm text-gray-500 bg-gray-800 px-3 py-1 rounded-full">🌐 Public</span>
+                                        <span className="text-sm text-gray-500 dark:bg-gray-800 px-1 py-1 rounded-full">🌐</span>
                                     </div>
 
                                     {/* Query Title */}
-                                    <h3 className="text-xl font-extrabold text-white leading-tight mb-3">
+                                    <h3 className="text-xl font-extrabold dark:text-white leading-tight mb-3">
                                         {query.queryTitle}
                                     </h3>
-
+                                   {/* Product Info */}
+                                    <div className="space-y-2 mb-2 flex-grow">
+                                        <p className="text-base dark:text-gray-300">
+                                            🛍️ <span className="font-semibold text-gray-500">Product:</span>
+                                            <strong className="dark:text-lime-400 ml-1">{query.productName?.slice(0, 20)}{query.productName.length > 20 ? '...' : ''}</strong> 
+                                        </p>
+                                        <p className="text-sm ">
+                                             <span className="font-semibold"></span> {query.boycottingReason?.slice(0, 150)}{query.boycottingReason.length > 150 ? '...' : ''}
+                                        </p>
+                                       
+                                    </div>
                                     {/* Product Image */}
                                     {query.productImage && (
                                         <div className="rounded-xl w-full max-h-64 overflow-hidden border border-gray-700 mb-4 flex justify-center items-center bg-gray-900">
@@ -240,25 +251,16 @@ const handleGridLayoutClick = (a) => {
                                         </div>
                                     )}
 
-                                    {/* Product Info */}
-                                    <div className="space-y-2 mb-2 flex-grow">
-                                        <p className="text-base text-gray-300">
-                                            🛍️ <span className="font-semibold">Product:</span>
-                                            <strong className="text-lime-400 ml-1">{query.productName}</strong> ({query.productBrand})
-                                        </p>
-                                        <p className="text-sm text-red-400 ">
-                                            ❌ <span className="font-semibold">Reason:</span> {query.boycottingReason?.slice(0, 150)}{query.boycottingReason.length > 150 ? '...' : ''}
-                                        </p>
-                                       
-                                    </div>
+                                    
  <div className="flex items-center justify-between text-sm my-2">
-                                            {query.likes?.length > 0 && (
+                                            {query.likes?.length >= 0 && (
                                                 <div className='flex items-center gap-1 text-pink-300'>
-                                                    <FcLike size={20} /> {query.likes.length}
+                                                   <AiFillHeart size={20} className="text-red-700" /> {query.likes.length}
                                                 </div>
+                                                
                                             )}
-                                            <p className="text-cyan-300 flex items-center gap-1">
-                                                💡 <span className="font-semibold">Recommendations:</span> {query.recommendationCount || 0}
+                                            <p className="text-cyan-900 flex items-center gap-1">
+                                                <FaCommentAlt size={15} /> <span className="font-semibold"></span> {query.recommendationCount || 0}
                                             </p>
                                             
                                         </div>
@@ -269,7 +271,7 @@ const handleGridLayoutClick = (a) => {
                                             className="hover:text-lime-300 flex items-center gap-2 cursor-pointer transition-colors duration-200    rounded-md px-2 py-1"
                                             aria-label={isLiked ? "Unlike" : "Like"}
                                         >
-                                            {isLiked ? <FcDislike className='text-red-500' size={24} /> : <FcLike size={24} />}
+                                            {isLiked ? <FcDislike className='text-red-700' size={24} /> :  <AiFillHeart size={24} className="text-red-700"  />}
                                             <span className="hidden sm:inline">{isLiked ? 'Unlike' : 'Like'}</span>
                                         </button>
                                         <button
@@ -295,7 +297,7 @@ const handleGridLayoutClick = (a) => {
             </main>
 
            {/* Right Sidebar - Desktop */}
-            <aside className="hidden lg:flex flex-col w-1/5 p-6 rounded-2xl mr-4 bg-[#1c1f3b] shadow-xl sticky top-0 h-screen overflow-y-auto space-y-8 transform transition-all duration-300 hover:scale-[1.01]">
+            <aside className="hidden lg:flex flex-col w-1/5 p-6 rounded-2xl mr-4 dark:bg-[#1c1f3b] bg-gray-200 shadow-xl sticky top-0 h-screen overflow-y-auto space-y-8 transform transition-all duration-300 hover:scale-[1.01]">
                 {user ? (
                     <div className="flex flex-col items-center text-center space-y-5">
                         <img
@@ -303,7 +305,7 @@ const handleGridLayoutClick = (a) => {
                             alt="User Avatar"
                             className="w-24 h-24 rounded-full object-cover border-4 border-lime-400 shadow-lg "
                         />
-                        <p className="text-2xl font-extrabold text-lime-300 drop-shadow-lg">
+                        <p className="text-2xl font-extrabold dark:text-lime-300 drop-shadow-lg">
                             Welcome, <span className="text-white">{user.displayName}!</span> 👋
                         </p>
                         <p className="text-sm text-gray-400">
@@ -326,7 +328,7 @@ const handleGridLayoutClick = (a) => {
                     </div>
                 ) : (
                     <div className="flex flex-col items-center text-center space-y-5">
-                        <p className="text-2xl font-extrabold text-lime-300 drop-shadow-lg">
+                        <p className="text-2xl font-extrabold dark:text-lime-300 drop-shadow-lg">
                             Join the Conversation! 🚀
                         </p>
                         <p className="text-sm text-gray-400">
@@ -352,12 +354,9 @@ const handleGridLayoutClick = (a) => {
             </aside>
 
             {/* Mobile Sticky Footer Navigation */}
-            <div className="lg:hidden  left-0 w-full  bg-[#1c1f3b] border-t border-gray-700 py-3 px-4 flex justify-around items-center z-50 shadow-lg">
-                <Link to="/" className="flex flex-col items-center text-gray-400 hover:text-lime-400 transition-colors duration-200">
-                    <FaCommentAlt size={20} />
-                    <span className="text-xs mt-1">Feed</span>
-                </Link>
-                <Link to="/add-query" className="flex flex-col items-center bg-lime-400 text-black p-3 rounded-full shadow-lg hover:bg-lime-300 transition-colors duration-200 transform -translate-y-2">
+            <div className="lg:hidden  left-0 w-full  bg-gray-100 dark:bg-[#0D1128] text-gray-900 dark:text-white border-t border-gray-700 py-3 px-4 flex justify-around items-center z-10 shadow-lg">
+             
+                <Link to="/add-query" className="flex flex-col items-center bg-gray-300 dark:bg-lime-400 text-black p-3 rounded-full shadow-lg hover:bg-lime-300 transition-colors duration-200 transform -translate-y-2">
                     <span className="text-xl font-bold">+</span>
                 </Link>
                 {user ? (
