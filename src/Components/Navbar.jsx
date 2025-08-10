@@ -103,7 +103,7 @@ const Navbar = () => {
                     <li><NavLink to="/my-queries" onClick={() => setMenuOpen(false)}>My Queries</NavLink></li>
                     <li><NavLink to="/my-recommendations" onClick={() => setMenuOpen(false)}>My Recommendations</NavLink></li>
                     <li><NavLink to="/add-query" onClick={() => setMenuOpen(false)}>Add Query</NavLink></li>
-                    <li><NavLink to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</NavLink></li>
+                    {/* <li><NavLink to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</NavLink></li> */}
                   </>
                 )}
 
@@ -168,7 +168,7 @@ const Navbar = () => {
                 <NavLink to="/my-queries" className="block px-4 py-2 hover:bg-lime-500 hover:text-black rounded-md">My Queries</NavLink>
                 <NavLink to="/my-recommendations" className="block px-4 py-2 hover:bg-lime-500 hover:text-black rounded-md">My Recommendations</NavLink>
                 <NavLink to="/add-query" className="block px-4 py-2 hover:bg-lime-500 hover:text-black rounded-md">Add Query</NavLink>
-                <NavLink to="/dashboard" className="block px-4 py-2 hover:bg-lime-500 hover:text-black rounded-md">Dashboard</NavLink>
+                {/* <NavLink to="/dashboard" className="block px-4 py-2 hover:bg-lime-500 hover:text-black rounded-md">Dashboard</NavLink> */}
               </div>
             </div>
           )}
