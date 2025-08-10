@@ -1,24 +1,24 @@
-import React, { useContext } from 'react'; // Import useContext
-import { AuthContext } from '../Contexts/AuthContext'; // Import AuthContext
+import React, { useContext } from 'react';
+import { AuthContext } from '../Contexts/AuthContext';
 import {
-    FaPlusCircle,      // For "Add Queries"
-    FaSearch,         // For "Discover Alternatives" / "Smart Search"
-    FaRegLightbulb,   // For "Share Expertise" / "Recommendations"
-    FaEdit,           // For "Manage Contributions" (Update)
-    FaTrashAlt,       // For "Manage Contributions" (Delete)
-    FaUsers,          // For "Community Engagement"
-    FaHandPointRight, // Another option for call to action
-    FaExchangeAlt,    // For finding alternatives
-    FaEye             // For viewing details
+    FaPlusCircle,
+    FaSearch,
+    FaRegLightbulb,
+    FaEdit,
+    FaTrashAlt,
+    FaUsers,
+    FaHandPointRight,
+    FaExchangeAlt,
+    FaEye
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 const Features = () => {
-    const { user } = useContext(AuthContext); // Get user from AuthContext
+    // Get both user and theme from AuthContext to enable dynamic theming
+    const { user, theme } = useContext(AuthContext);
 
-    // Determine the redirect path for a logged-in user
-    const redirectPathForLoggedInUser = '/add-query'; // You can change this if you prefer a different route
+    const redirectPathForLoggedInUser = '/add-query';
 
     const featureItems = [
         {
@@ -54,17 +54,17 @@ const Features = () => {
     ];
 
     return (
-        <div className="min-h-screen  bg-[#0D1128] text-white font-sans py-16 px-4 sm:px-6 lg:px-8">
-             <Helmet>
-                         <title>RecoSys | Features</title>
-                        </Helmet>
+        <div className="min-h-screen bg-white dark:bg-[#0D1128] text-gray-900 dark:text-white font-sans py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-500">
+            <Helmet>
+                <title>RecoSys | Features</title>
+            </Helmet>
             <div className="max-w-7xl mx-auto text-center">
-                <h1 className="text-6xl font-extrabold text-lime-400 mb-8 drop-shadow-lg leading-tight animate-fade-in-down">
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-lime-300 to-lime-600">
+                <h1 className="text-6xl font-extrabold text-lime-600 dark:text-lime-400 mb-8 drop-shadow-lg leading-tight animate-fade-in-down">
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-lime-500 to-lime-700 dark:from-lime-300 dark:to-lime-600">
                         Powerful Features at Your Fingertips
                     </span>
                 </h1>
-                <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto animate-fade-in-up">
+                <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto animate-fade-in-up">
                     RecoSys is designed to be intuitive and empowering, offering a suite of features to help you navigate your product choices with confidence and community support.
                 </p>
 
@@ -72,31 +72,31 @@ const Features = () => {
                     {featureItems.map((feature, index) => (
                         <div
                             key={index}
-                            className="bg-[#1c1f3b] p-8 rounded-3xl shadow-xl border border-gray-700
-                                       transform transition-transform duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-lime-500/30 group animate-fade-in"
+                            className="bg-white dark:bg-[#1c1f3b] p-8 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700
+                            transform transition-transform duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-lime-500/30 group animate-fade-in"
                         >
-                            <div className="text-lime-400 text-5xl mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <div className="text-lime-500 dark:text-lime-400 text-5xl mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                 {feature.icon}
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-4 leading-snug">
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 leading-snug">
                                 {feature.title}
                             </h3>
-                            <p className="text-gray-300 text-lg leading-relaxed">
+                            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
                                 {feature.description}
                             </p>
                         </div>
                     ))}
                 </div>
 
-                <div className="p-8 bg-[#1c1f3b] rounded-3xl shadow-2xl border border-gray-700 animate-slide-in-up">
-                    <h2 className="text-4xl font-bold text-lime-300 mb-6 drop-shadow">
+                <div className="p-8 bg-white dark:bg-[#1c1f3b] rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 animate-slide-in-up">
+                    <h2 className="text-4xl font-bold text-lime-500 dark:text-lime-300 mb-6 drop-shadow">
                         Ready to Transform Your Product Choices?
                     </h2>
-                    <p className="text-lg text-gray-300 max-w-xl mx-auto mb-8">
+                    <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-8">
                         Join RecoSys today and become part of a movement dedicated to informed and ethical consumption.
                     </p>
                     <Link
-                        to={user ? redirectPathForLoggedInUser : "/register"} // Conditional redirect based on user login status
+                        to={user ? redirectPathForLoggedInUser : "/register"}
                         className="mt-6 bg-gradient-to-r from-lime-500 to-lime-300 text-black font-extrabold text-xl
                         px-12 py-5 rounded-full shadow-2xl hover:shadow-lime-400/70
                         transform hover:scale-105 transition-all duration-300 ease-in-out
@@ -104,12 +104,12 @@ const Features = () => {
                     >
                         <span className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
                         <span className="relative z-10">
-                            {user ? "Start Adding Queries!" : "Get Started Now"} {/* Text changes based on login */}
+                            {user ? "Start Adding Queries!" : "Get Started Now"}
                         </span>
                         {user ? (
-                            <FaPlusCircle className="relative z-10 text-2xl" /> // Icon for logged-in user
+                            <FaPlusCircle className="relative z-10 text-2xl" />
                         ) : (
-                            <FaHandPointRight className="relative z-10 text-2xl" /> // Original icon for not logged-in
+                            <FaHandPointRight className="relative z-10 text-2xl" />
                         )}
                     </Link>
                 </div>

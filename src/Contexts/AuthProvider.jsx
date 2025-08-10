@@ -60,6 +60,33 @@ axios.post('https://product-reco-server.vercel.app/jwt', userData,{
         return () => unsubscribe();
     }, []);
 
+
+
+const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || "light";
+    }
+    return "light";
+  });
+
+  // Apply theme to <html> tag
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+
+
+
+
+
+
+
+
     const authInfo = {
         user,
         loading,
@@ -70,7 +97,9 @@ setRecommender,
         SignInwithGoogle,
         updateuser,
         setUser,
-        setLoading
+        setLoading,
+         setTheme,
+    theme
     };
 
     return (
