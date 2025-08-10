@@ -5,7 +5,7 @@ import ExtraSection1 from '../../Components/ExtraSection1';
 import ExtraSection2 from '../../Components/ExtraSection2';
 import { AiFillHeart } from "react-icons/ai";
 import { FcLike, FcDislike } from "react-icons/fc";
-import { FaCommentAlt, FaTh, FaThLarge, FaList } from 'react-icons/fa'; // Added icons for layouts
+import { FaCommentAlt, FaTh, FaThLarge, FaList, FaStreetView, FaChevronCircleDown, FaEyeDropper, FaEye } from 'react-icons/fa'; // Added icons for layouts
 import { MdShare, MdFilterList, MdOutlineClose } from 'react-icons/md'; // Added filter and close icons
 import Looding1 from './Looding/Looding1';
 import { toast } from 'react-toastify';
@@ -259,6 +259,12 @@ const handleGridLayoutClick = (a) => {
                                                 </div>
                                                 
                                             )}
+                                           <Link to={`/query/${query._id}`}>
+                                            <p className="text-cyan-900 flex items-center gap-1">
+                                                <FaEye size={15} /> <span className="font-semibold"></span> See More
+                                            </p>
+                                           </Link>
+
                                             <p className="text-cyan-900 flex items-center gap-1">
                                                 <FaCommentAlt size={15} /> <span className="font-semibold"></span> {query.recommendationCount || 0}
                                             </p>
