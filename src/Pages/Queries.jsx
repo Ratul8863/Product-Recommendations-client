@@ -2,11 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthContext';
 import { FcLike, FcDislike } from "react-icons/fc";
-import { FaCommentAlt, FaTh, FaThLarge, FaList, FaRegLightbulb, FaShareAlt, FaSearch, FaInfoCircle, FaSortAmountDownAlt } from 'react-icons/fa';
+import { FaCommentAlt, FaTh, FaThLarge, FaList, FaRegLightbulb, FaShareAlt, FaSearch, FaInfoCircle, FaSortAmountDownAlt, FaEye } from 'react-icons/fa';
 import { Helmet } from 'react-helmet-async';
 import Looding1 from './Shared/Looding/Looding1';
 import { toast } from 'react-toastify';
-import { MdFilterList, MdOutlineClose } from 'react-icons/md';
+import { MdFilterList, MdOutlineClose, MdShare } from 'react-icons/md';
+import { AiFillHeart } from 'react-icons/ai';
 
 const Queries = () => {
     const [queries, setQueries] = useState([]);
@@ -204,51 +205,97 @@ const Queries = () => {
                         {sortedQueries.map(query => {
                             const isLiked = user && query.likes?.includes(user?.email);
                             return (
-                                <div key={query._id} className="bg-white dark:bg-[#1c1f3b] rounded-3xl p-7 shadow-xl border border-gray-200 dark:border-gray-700 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-lime-500/30 transition duration-300 group flex flex-col">
-                                    <div>
-                                        <div className="flex items-center justify-between mb-4">
-                                            <div className="flex items-center gap-3">
-                                                <img src={query.userPhoto || '/avatar.png'} className="w-12 h-12 rounded-full border-2 border-lime-400" alt="" />
-                                                <div>
-                                                    <p className="font-bold text-lime-500 dark:text-lime-300">{query.userName}</p>
-                                                    <p className="text-xs text-gray-500 dark:text-gray-500">{new Date(query.createdAt).toLocaleString()}</p>
-                                                </div>
-                                            </div>
-                                            <span className="text-sm rounded-full">🌐 </span>
-                                        </div>
-                                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{query.queryTitle}</h3>
-                                        {query.productImage && (
-                                            <div className="w-full h-40 bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-                                                <img src={query.productImage} className="object-cover w-full h-full group-hover:scale-110 transition duration-300" alt="" />
-                                            </div>
-                                        )}
-                                        <p className="text-gray-600 dark:text-gray-300"><span className="text-lime-500 dark:text-lime-400">🛍️ Product:</span> <b>{query.productName}</b> </p>
-                                        <div className="h-20 overflow-y-auto mt-2">
-                                            <p className="text-sm text-red-600 dark:text-red-400">❌ Reason: {query.boycottingReason}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-4 flex flex-col">
-                                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300 mb-4">
-                                            {query.likes?.length > 0 && (
-                                                <span className="flex items-center gap-1 text-pink-500 dark:text-pink-300"><FcLike /> {query.likes.length}</span>
-                                            )}
-                                            <span className="text-cyan-500 dark:text-cyan-300">💡 Recommendations: {query.recommendationCount || 0}</span>
-                                        </div>
-
-                                        <div className="flex justify-around pt-5 border-t border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400">
-                                            <button onClick={() => handleLike(query._id)} className="hover:text-lime-500 dark:hover:text-lime-300 flex gap-2 items-center cursor-pointer">
-                                                {isLiked ? <FcDislike /> : <FcLike />}
-                                            </button>
-                                            <button onClick={() => handleRecommend(query._id)} className="hover:text-lime-500 dark:hover:text-lime-300 flex gap-2 items-center cursor-pointer">
-                                                <FaCommentAlt />
-                                            </button>
-                                            <button onClick={() => handleShare(query._id)} className="hover:text-lime-500 dark:hover:text-lime-300 flex gap-2 items-center cursor-pointer">
-                                                <FaShareAlt />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                               <div
+                                                                   key={query._id}
+                                                                   className="bg-white dark:bg-[#0D1128] text-gray-900 dark:text-white rounded-2xl shadow-lg hover:shadow-lime-400/50 transition-all duration-300 p-6  border border-gray-200 dark:border-gray-700 transform hover:-translate-y-1 hover:scale-[1.01] flex flex-col"
+                                                               >
+                                                                   {/* Header */}
+                                                                   <div className="flex justify-between items-center mb-4">
+                                                                       <div className="flex items-center gap-3">
+                                                                           <img
+                                                                               src={query.userPhoto || '/avatar.png'}
+                                                                               alt={query.userName}
+                                                                               className="w-12 h-12 rounded-full border-2 border-lime-400 object-cover"
+                                                                           />
+                                                                           <div>
+                                                                               <p className="font-bold dark:text-lime-300 text-lg">{query.userName}</p>
+                                                                               <p className="text-xs text-gray-500">{new Date(query.createdAt).toLocaleString()}</p>
+                                                                           </div>
+                                                                       </div>
+                                                                       <span className="text-sm text-gray-500 dark:bg-gray-800 px-1 py-1 rounded-full">🌐</span>
+                                                                   </div>
+                               
+                                                                   {/* Query Title */}
+                                                                   <h3 className="text-xl font-extrabold dark:text-white leading-tight mb-3">
+                                                                       {query.queryTitle}
+                                                                   </h3>
+                                                                  {/* Product Info */}
+                                                                   <div className="space-y-2 mb-2 flex-grow">
+                                                                       <p className="text-base dark:text-gray-300">
+                                                                           🛍️ <span className="font-semibold text-gray-500">Product:</span>
+                                                                           <strong className="dark:text-lime-400 ml-1">{query.productName?.slice(0, 20)}{query.productName.length > 20 ? '...' : ''}</strong> 
+                                                                       </p>
+                                                                       <p className="text-sm ">
+                                                                            <span className="font-semibold"></span> {query.boycottingReason?.slice(0, 150)}{query.boycottingReason.length > 150 ? '...' : ''}
+                                                                       </p>
+                                                                      
+                                                                   </div>
+                                                                   {/* Product Image */}
+                                                                   {query.productImage && (
+                                                                       <div className="rounded-xl w-full max-h-64 overflow-hidden border border-gray-700 mb-4 flex justify-center items-center bg-gray-900">
+                                                                           <img
+                                                                               src={query.productImage}
+                                                                               alt={query.productName}
+                                                                               className="w-full h-full object-contain p-2 hover:scale-105 transition-transform duration-500 ease-in-out"
+                                                                           />
+                                                                       </div>
+                                                                   )}
+                               
+                                                                   
+                                <div className="flex items-center justify-between text-sm my-2">
+                                                                           {query.likes?.length >= 0 && (
+                                                                               <div className='flex items-center gap-1 text-pink-300'>
+                                                                                  <AiFillHeart size={20} className="text-red-700" /> {query.likes.length}
+                                                                               </div>
+                                                                               
+                                                                           )}
+                                                                          <Link to={`/query/${query._id}`}>
+                                                                           <p className="text-cyan-900 flex items-center gap-1">
+                                                                               <FaEye size={15} /> <span className="font-semibold"></span> See More
+                                                                           </p>
+                                                                          </Link>
+                               
+                                                                           <p className="text-cyan-900 flex items-center gap-1">
+                                                                               <FaCommentAlt size={15} /> <span className="font-semibold"></span> {query.recommendationCount || 0}
+                                                                           </p>
+                                                                           
+                                                                       </div>
+                                                                   {/* Reactions */}
+                                                                   <div className="flex justify-around border-t border-gray-700 pt-4 text-sm text-gray-400 mt-auto">
+                                                                       <button
+                                                                           onClick={(e) => { e.stopPropagation(); handleLike(query._id); }}
+                                                                           className="hover:text-lime-300 flex items-center gap-2 cursor-pointer transition-colors duration-200    rounded-md px-2 py-1"
+                                                                           aria-label={isLiked ? "Unlike" : "Like"}
+                                                                       >
+                                                                           {isLiked ? <FcDislike className='text-red-700' size={24} /> :  <AiFillHeart size={24} className="text-red-700"  />}
+                                                                           <span className="hidden sm:inline">{isLiked ? 'Unlike' : 'Like'}</span>
+                                                                       </button>
+                                                                       <button
+                                                                           onClick={(e) => { e.stopPropagation(); handleRecommend(query._id); }}
+                                                                           className="hover:text-lime-300 flex items-center gap-2 cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 rounded-md px-2 py-1"
+                                                                           aria-label="Recommend"
+                                                                       >
+                                                                           <FaCommentAlt size={20} /> <span className="hidden sm:inline">Recommend</span>
+                                                                       </button>
+                                                                       <button
+                                                                           onClick={(e) => { e.stopPropagation(); handleShare(query._id); }}
+                                                                           className="hover:text-lime-300 flex items-center gap-2 cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 rounded-md px-2 py-1"
+                                                                           aria-label="Share"
+                                                                       >
+                                                                           <MdShare size={24} /> <span className="hidden sm:inline">Share</span>
+                                                                       </button>
+                                                                   </div>
+                                                               </div>
                             );
                         })}
                     </div>
