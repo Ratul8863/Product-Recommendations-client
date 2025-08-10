@@ -44,7 +44,7 @@ const RecommendationsForMe = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-[#0D1128] text-gray-900 dark:text-white py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500">
+    <div className="min-h-screen bg-white dark:bg-[#0D1128] text-gray-900 dark:text-white py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500">
       <Helmet>
         <title>RecoSys | Recommendations for me</title>
       </Helmet>
