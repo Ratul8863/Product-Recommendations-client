@@ -260,12 +260,12 @@ const handleGridLayoutClick = (a) => {
                                                 
                                             )}
                                            <Link to={`/query/${query._id}`}>
-                                            <p className="text-cyan-900 flex items-center gap-1">
-                                                <FaEye size={15} /> <span className="font-semibold"></span> See More
+                                            <p className="text-cyan-900 dark:text-white flex items-center gap-1">
+                                                <FaEye size={15} /> <span className="font-semibold "></span> See More
                                             </p>
                                            </Link>
 
-                                            <p className="text-cyan-900 flex items-center gap-1">
+                                            <p className="text-cyan-900 dark:text-white flex items-center gap-1">
                                                 <FaCommentAlt size={15} /> <span className="font-semibold"></span> {query.recommendationCount || 0}
                                             </p>
                                             
